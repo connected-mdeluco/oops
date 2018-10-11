@@ -223,7 +223,7 @@
 					};
 				};
 			};
-			buildConfigurationList = F4F09DAE1DAF669400026BB2 /* Build configuration list for PBXProject "QRCodeReader" */;
+			buildConfigurationList = F4F09DAE1DAF669400026BB2 /* Build configuration list for PBXProject "Toybox" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -586,7 +586,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F4F09DAE1DAF669400026BB2 /* Build configuration list for PBXProject "QRCodeReader" */ = {
+		F4F09DAE1DAF669400026BB2 /* Build configuration list for PBXProject "Toybox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F4F09DC31DAF669400026BB2 /* Debug */,

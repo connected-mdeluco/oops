@@ -17,9 +17,6 @@ class SnipeManager {
     private static let apiKeyName = "SnipeKey" // located in Keys.plist
     static let urlPrefix = "https://cl.snipe-it.io/hardware/"
     
-    /* TODO: Add information about API key location in README
-     */
-    
     enum ObjectType {
         case deviceObject
         case deviceActionResponseObject

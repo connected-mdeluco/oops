@@ -28,7 +28,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     var qrCodeFrameView: UIView?
     var player: AVAudioPlayer?
     
-    // MARK: -View setup
+    // MARK: -View setup/Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,7 +93,6 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
             videoPreviewLayer?.frame = view.layer.bounds
             view.layer.addSublayer(videoPreviewLayer!)
         }
-        
         
         // Start video capture
         videoCaptureSession?.startRunning()
@@ -162,8 +161,6 @@ extension QRScannerController {
                                                         message: devices,
                                                         preferredStyle: .alert)
         // TODO: device confirmation alert is overriding potential error alerts.
-        // fix this so that we get the error message before confirmation.
-        // do tryborrow/tryreturn before confirming?
         switch(scanType) {
         case .borrowDevice:
             deviceIds.forEach { (device) in
@@ -208,7 +205,7 @@ extension QRScannerController {
             self.refreshCaptureSession()
         }))
         self.present(deviceConfirmationAlert, animated: true, completion: nil)
-        let delayTime = DispatchTime.now() + 2.0
+        let delayTime = DispatchTime.now() + 1.0
         DispatchQueue.main.asyncAfter(deadline: delayTime, execute: {
             deviceConfirmationAlert.dismiss(animated: true, completion: nil)
             self.refreshCaptureSession()

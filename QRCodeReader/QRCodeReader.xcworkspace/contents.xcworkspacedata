@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:QRCodeReader.xcodeproj">
+      location = "group:/Users/cl-dev/Downloads/toybox-ios/QRCodeReader/Toybox.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
