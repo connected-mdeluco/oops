@@ -4,6 +4,8 @@
 
 The .gitignore includes a file "Keys.plist" that contains the API key. In the SnipeAPIManager.swift file, we use the API key to make requests to Snipe-IT, but the Keys.plist file has been omitted for security reasons. To include the API key, create a Keys.plist file and add a string with the key "SnipeKey" and the value being the API key.
 
+![alt text](https://github.com/connected-io/toybox-ios/README\ images/apikey.png)
+
 ## Classes
 
 ### QRCodeViewController
