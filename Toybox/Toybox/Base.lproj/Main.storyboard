@@ -231,7 +231,7 @@
                                 </constraints>
                             </view>
                             <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rwk-Pd-JPk">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="80"/>
+                                <rect key="frame" x="0.0" y="50" width="768" height="80"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahh-FU-uJK">
                                         <rect key="frame" x="349.5" y="35" width="69.5" height="34"/>
@@ -278,6 +278,6 @@
         <image name="unnamed" width="320" height="132"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="iJJ-4N-2vq"/>
+        <segue reference="dGL-Xr-M4d"/>
     </inferredMetricsTieBreakers>
 </document>

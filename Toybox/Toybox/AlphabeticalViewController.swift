@@ -151,7 +151,7 @@ extension AlphabeticalViewController: UISearchBarDelegate {
             searchActive = false
         }
     }
-    
+
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true;
         if searchBar.text?.count != 0 {

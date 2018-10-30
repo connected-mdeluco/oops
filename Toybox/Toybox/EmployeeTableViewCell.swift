@@ -16,7 +16,7 @@ class EmployeeTableViewCell: UITableViewCell {
     static var identifier = "employeeCell"
     
     func configureWithItem(item: Employee) {
-        name?.text = item.name
+        name.text = item.name
         employee = item
     }
 }

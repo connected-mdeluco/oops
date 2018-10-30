@@ -46,7 +46,7 @@
 		BFA7F05EE397BA44D23528FF /* Pods-QRCodeReaderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QRCodeReaderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QRCodeReaderTests/Pods-QRCodeReaderTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F4432264214954E800A25CA2 /* AlphabeticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabeticalViewController.swift; sourceTree = "<group>"; };
 		F44322662149637600A25CA2 /* EmployeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewCell.swift; sourceTree = "<group>"; };
-		F443226E214AE1C700A25CA2 /* QRCodeReaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QRCodeReaderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F443226E214AE1C700A25CA2 /* ToyboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToyboxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4432270214AE1C700A25CA2 /* QRCodeReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeReaderTests.swift; sourceTree = "<group>"; };
 		F4432272214AE1C700A25CA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4432278214FF54600A25CA2 /* SnipeAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnipeAPIManager.swift; sourceTree = "<group>"; };
@@ -56,7 +56,7 @@
 		F4BB498E215D70DB00F74744 /* StringLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLiterals.swift; sourceTree = "<group>"; };
 		F4D8B04D2167AE7700C1CCAF /* Ding Sound Effect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Ding Sound Effect.mp3"; path = "../../Ding Sound Effect.mp3"; sourceTree = "<group>"; };
 		F4D8B04F2167AE8100C1CCAF /* LEMON GRAB UNACCEPTABLE.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "LEMON GRAB UNACCEPTABLE.mp3"; path = "../../LEMON GRAB UNACCEPTABLE.mp3"; sourceTree = "<group>"; };
-		F4F09DB31DAF669400026BB2 /* QRCodeReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRCodeReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4F09DB31DAF669400026BB2 /* Toybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F09DB61DAF669400026BB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4F09DBB1DAF669400026BB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F4F09DBD1DAF669400026BB2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -131,8 +131,8 @@
 		F4F09DB41DAF669400026BB2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F4F09DB31DAF669400026BB2 /* QRCodeReader.app */,
-				F443226E214AE1C700A25CA2 /* QRCodeReaderTests.xctest */,
+				F4F09DB31DAF669400026BB2 /* Toybox.app */,
+				F443226E214AE1C700A25CA2 /* ToyboxTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -161,9 +161,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F443226D214AE1C700A25CA2 /* QRCodeReaderTests */ = {
+		F443226D214AE1C700A25CA2 /* ToyboxTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F4432275214AE1C700A25CA2 /* Build configuration list for PBXNativeTarget "QRCodeReaderTests" */;
+			buildConfigurationList = F4432275214AE1C700A25CA2 /* Build configuration list for PBXNativeTarget "ToyboxTests" */;
 			buildPhases = (
 				3C1CA905EA0A177107302E03 /* [CP] Check Pods Manifest.lock */,
 				F443226A214AE1C700A25CA2 /* Sources */,
@@ -175,14 +175,14 @@
 			dependencies = (
 				F4432274214AE1C700A25CA2 /* PBXTargetDependency */,
 			);
-			name = QRCodeReaderTests;
+			name = ToyboxTests;
 			productName = QRCodeReaderTests;
-			productReference = F443226E214AE1C700A25CA2 /* QRCodeReaderTests.xctest */;
+			productReference = F443226E214AE1C700A25CA2 /* ToyboxTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		F4F09DB21DAF669400026BB2 /* QRCodeReader */ = {
+		F4F09DB21DAF669400026BB2 /* Toybox */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F4F09DC51DAF669400026BB2 /* Build configuration list for PBXNativeTarget "QRCodeReader" */;
+			buildConfigurationList = F4F09DC51DAF669400026BB2 /* Build configuration list for PBXNativeTarget "Toybox" */;
 			buildPhases = (
 				9517ED26C91D9EF5D3E6810F /* [CP] Check Pods Manifest.lock */,
 				F4F09DAF1DAF669400026BB2 /* Sources */,
@@ -194,9 +194,9 @@
 			);
 			dependencies = (
 			);
-			name = QRCodeReader;
+			name = Toybox;
 			productName = QRCodeReader;
-			productReference = F4F09DB31DAF669400026BB2 /* QRCodeReader.app */;
+			productReference = F4F09DB31DAF669400026BB2 /* Toybox.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -236,8 +236,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F4F09DB21DAF669400026BB2 /* QRCodeReader */,
-				F443226D214AE1C700A25CA2 /* QRCodeReaderTests */,
+				F4F09DB21DAF669400026BB2 /* Toybox */,
+				F443226D214AE1C700A25CA2 /* ToyboxTests */,
 			);
 		};
 /* End PBXProject section */
@@ -356,7 +356,7 @@
 /* Begin PBXTargetDependency section */
 		F4432274214AE1C700A25CA2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = F4F09DB21DAF669400026BB2 /* QRCodeReader */;
+			target = F4F09DB21DAF669400026BB2 /* Toybox */;
 			targetProxy = F4432273214AE1C700A25CA2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -577,7 +577,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F4432275214AE1C700A25CA2 /* Build configuration list for PBXNativeTarget "QRCodeReaderTests" */ = {
+		F4432275214AE1C700A25CA2 /* Build configuration list for PBXNativeTarget "ToyboxTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F4432276214AE1C700A25CA2 /* Debug */,
@@ -595,7 +595,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F4F09DC51DAF669400026BB2 /* Build configuration list for PBXNativeTarget "QRCodeReader" */ = {
+		F4F09DC51DAF669400026BB2 /* Build configuration list for PBXNativeTarget "Toybox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F4F09DC61DAF669400026BB2 /* Debug */,
