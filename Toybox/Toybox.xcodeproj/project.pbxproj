@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F5E765A2BAC50DCD1915006 /* Pods_ToyboxTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C82F1CEDC9866183B7140EC /* Pods_ToyboxTests.framework */; };
 		84B581677DD25D4B5C789D1A /* Pods_QRCodeReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B9C6BD1F40ECF65D3C0FCC19 /* Pods_QRCodeReader.framework */; };
 		B1B5C9C912A9076946A645B0 /* Pods_QRCodeReaderTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B94372C71B03026D8FF9201 /* Pods_QRCodeReaderTests.framework */; };
+		DC2008F505EC0F9471B1237C /* Pods_Toybox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00BAE7AC6502AA8E688B5B90 /* Pods_Toybox.framework */; };
 		F4432265214954E800A25CA2 /* AlphabeticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4432264214954E800A25CA2 /* AlphabeticalViewController.swift */; };
 		F44322672149637600A25CA2 /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44322662149637600A25CA2 /* EmployeeTableViewCell.swift */; };
 		F4432271214AE1C700A25CA2 /* QRCodeReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4432270214AE1C700A25CA2 /* QRCodeReaderTests.swift */; };
@@ -38,12 +40,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00BAE7AC6502AA8E688B5B90 /* Pods_Toybox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Toybox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		06DFC50B743E3E5C7758EE6C /* Pods-ToyboxTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToyboxTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-ToyboxTests/Pods-ToyboxTests.release.xcconfig"; sourceTree = "<group>"; };
 		31B37FA4E80D067EE5ABB615 /* Pods-QRCodeReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QRCodeReader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QRCodeReader/Pods-QRCodeReader.debug.xcconfig"; sourceTree = "<group>"; };
+		35A8326CBDF649DFAA223B0B /* Pods-Toybox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Toybox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Toybox/Pods-Toybox.debug.xcconfig"; sourceTree = "<group>"; };
 		5480900B5803FFAB2C1BEB28 /* Pods-QRCodeReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QRCodeReader.release.xcconfig"; path = "Pods/Target Support Files/Pods-QRCodeReader/Pods-QRCodeReader.release.xcconfig"; sourceTree = "<group>"; };
 		70720664C2F66549B75933A2 /* Pods-QRCodeReaderTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QRCodeReaderTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-QRCodeReaderTests/Pods-QRCodeReaderTests.release.xcconfig"; sourceTree = "<group>"; };
 		8B94372C71B03026D8FF9201 /* Pods_QRCodeReaderTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QRCodeReaderTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C82F1CEDC9866183B7140EC /* Pods_ToyboxTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ToyboxTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9C6BD1F40ECF65D3C0FCC19 /* Pods_QRCodeReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QRCodeReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFA7F05EE397BA44D23528FF /* Pods-QRCodeReaderTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QRCodeReaderTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QRCodeReaderTests/Pods-QRCodeReaderTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C69251E0A9B13676F815C324 /* Pods-Toybox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Toybox.release.xcconfig"; path = "Pods/Target Support Files/Pods-Toybox/Pods-Toybox.release.xcconfig"; sourceTree = "<group>"; };
+		DCA8F6C1EDB762BE07E7AAC4 /* Pods-ToyboxTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToyboxTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ToyboxTests/Pods-ToyboxTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F4432264214954E800A25CA2 /* AlphabeticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphabeticalViewController.swift; sourceTree = "<group>"; };
 		F44322662149637600A25CA2 /* EmployeeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeTableViewCell.swift; sourceTree = "<group>"; };
 		F443226E214AE1C700A25CA2 /* ToyboxTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToyboxTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +80,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1B5C9C912A9076946A645B0 /* Pods_QRCodeReaderTests.framework in Frameworks */,
+				2F5E765A2BAC50DCD1915006 /* Pods_ToyboxTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84B581677DD25D4B5C789D1A /* Pods_QRCodeReader.framework in Frameworks */,
+				DC2008F505EC0F9471B1237C /* Pods_Toybox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +101,8 @@
 			children = (
 				B9C6BD1F40ECF65D3C0FCC19 /* Pods_QRCodeReader.framework */,
 				8B94372C71B03026D8FF9201 /* Pods_QRCodeReaderTests.framework */,
+				00BAE7AC6502AA8E688B5B90 /* Pods_Toybox.framework */,
+				8C82F1CEDC9866183B7140EC /* Pods_ToyboxTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -102,6 +114,10 @@
 				5480900B5803FFAB2C1BEB28 /* Pods-QRCodeReader.release.xcconfig */,
 				BFA7F05EE397BA44D23528FF /* Pods-QRCodeReaderTests.debug.xcconfig */,
 				70720664C2F66549B75933A2 /* Pods-QRCodeReaderTests.release.xcconfig */,
+				35A8326CBDF649DFAA223B0B /* Pods-Toybox.debug.xcconfig */,
+				C69251E0A9B13676F815C324 /* Pods-Toybox.release.xcconfig */,
+				DCA8F6C1EDB762BE07E7AAC4 /* Pods-ToyboxTests.debug.xcconfig */,
+				06DFC50B743E3E5C7758EE6C /* Pods-ToyboxTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -211,6 +227,7 @@
 				TargetAttributes = {
 					F443226D214AE1C700A25CA2 = {
 						CreatedOnToolsVersion = 9.4;
+						DevelopmentTeam = BFVB637U6Y;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 						TestTargetID = F4F09DB21DAF669400026BB2;
@@ -277,7 +294,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-QRCodeReaderTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-ToyboxTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -295,7 +312,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-QRCodeReader-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Toybox-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -308,7 +325,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-QRCodeReader/Pods-QRCodeReader-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-Toybox/Pods-Toybox-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CodableAlamofire/CodableAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
@@ -321,7 +338,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QRCodeReader/Pods-QRCodeReader-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Toybox/Pods-Toybox-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -383,7 +400,7 @@
 /* Begin XCBuildConfiguration section */
 		F4432276214AE1C700A25CA2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BFA7F05EE397BA44D23528FF /* Pods-QRCodeReaderTests.debug.xcconfig */;
+			baseConfigurationReference = DCA8F6C1EDB762BE07E7AAC4 /* Pods-ToyboxTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -392,6 +409,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BFVB637U6Y;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = QRCodeReaderTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -406,7 +424,7 @@
 		};
 		F4432277214AE1C700A25CA2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70720664C2F66549B75933A2 /* Pods-QRCodeReaderTests.release.xcconfig */;
+			baseConfigurationReference = 06DFC50B743E3E5C7758EE6C /* Pods-ToyboxTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -415,6 +433,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BFVB637U6Y;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = QRCodeReaderTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
@@ -540,7 +559,7 @@
 		};
 		F4F09DC61DAF669400026BB2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 31B37FA4E80D067EE5ABB615 /* Pods-QRCodeReader.debug.xcconfig */;
+			baseConfigurationReference = 35A8326CBDF649DFAA223B0B /* Pods-Toybox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -558,7 +577,7 @@
 		};
 		F4F09DC71DAF669400026BB2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5480900B5803FFAB2C1BEB28 /* Pods-QRCodeReader.release.xcconfig */;
+			baseConfigurationReference = C69251E0A9B13676F815C324 /* Pods-Toybox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
