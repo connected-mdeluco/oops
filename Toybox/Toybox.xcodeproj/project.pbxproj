@@ -18,8 +18,6 @@
 		F4BB49892152A84500F74744 /* SnipeAPIResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB49882152A84500F74744 /* SnipeAPIResponseModels.swift */; };
 		F4BB498D21552FEE00F74744 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB498C21552FEE00F74744 /* ErrorManager.swift */; };
 		F4BB498F215D70DC00F74744 /* StringLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB498E215D70DB00F74744 /* StringLiterals.swift */; };
-		F4D8B04E2167AE7700C1CCAF /* Ding Sound Effect.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4D8B04D2167AE7700C1CCAF /* Ding Sound Effect.mp3 */; };
-		F4D8B0502167AE8100C1CCAF /* LEMON GRAB UNACCEPTABLE.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F4D8B04F2167AE8100C1CCAF /* LEMON GRAB UNACCEPTABLE.mp3 */; };
 		F4F09DB71DAF669400026BB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F09DB61DAF669400026BB2 /* AppDelegate.swift */; };
 		F4F09DBC1DAF669400026BB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F09DBA1DAF669400026BB2 /* Main.storyboard */; };
 		F4F09DBE1DAF669400026BB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4F09DBD1DAF669400026BB2 /* Assets.xcassets */; };
@@ -61,8 +59,6 @@
 		F4BB49882152A84500F74744 /* SnipeAPIResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnipeAPIResponseModels.swift; sourceTree = "<group>"; };
 		F4BB498C21552FEE00F74744 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		F4BB498E215D70DB00F74744 /* StringLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLiterals.swift; sourceTree = "<group>"; };
-		F4D8B04D2167AE7700C1CCAF /* Ding Sound Effect.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "Ding Sound Effect.mp3"; path = "../../Ding Sound Effect.mp3"; sourceTree = "<group>"; };
-		F4D8B04F2167AE8100C1CCAF /* LEMON GRAB UNACCEPTABLE.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "LEMON GRAB UNACCEPTABLE.mp3"; path = "../../LEMON GRAB UNACCEPTABLE.mp3"; sourceTree = "<group>"; };
 		F4F09DB31DAF669400026BB2 /* Toybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F09DB61DAF669400026BB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4F09DBB1DAF669400026BB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -132,8 +128,6 @@
 		F4F09DAA1DAF669400026BB2 = {
 			isa = PBXGroup;
 			children = (
-				F4D8B04F2167AE8100C1CCAF /* LEMON GRAB UNACCEPTABLE.mp3 */,
-				F4D8B04D2167AE7700C1CCAF /* Ding Sound Effect.mp3 */,
 				F4F09DB51DAF669400026BB2 /* Toybox */,
 				F443226F214AE1C700A25CA2 /* ToyboxTests */,
 				F4F09DB41DAF669400026BB2 /* Products */,
@@ -270,8 +264,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				F499B300216F93B000F59810 /* Keys.plist in Resources */,
-				F4D8B0502167AE8100C1CCAF /* LEMON GRAB UNACCEPTABLE.mp3 in Resources */,
-				F4D8B04E2167AE7700C1CCAF /* Ding Sound Effect.mp3 in Resources */,
 				F4F09DC11DAF669400026BB2 /* LaunchScreen.storyboard in Resources */,
 				F4F09DBE1DAF669400026BB2 /* Assets.xcassets in Resources */,
 				F4F09DBC1DAF669400026BB2 /* Main.storyboard in Resources */,
@@ -323,7 +315,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Toybox/Pods-Toybox-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-Toybox/Pods-Toybox-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/CodableAlamofire/CodableAlamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
@@ -336,7 +328,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Toybox/Pods-Toybox-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Toybox/Pods-Toybox-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

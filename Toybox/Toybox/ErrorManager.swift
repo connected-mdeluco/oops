@@ -20,7 +20,7 @@ class ErrorManager: UIViewController {
         case deviceAlreadyReturned
     }
     
-    static func handleError(ofType type: SnipeError, withDeviceId id: String?, fromInstance instance: UIViewController?) {
+    static func handleError(ofType type: SnipeError, withDevice device: Device?, fromInstance instance: UIViewController?) {
         switch(type) {
         case .genericError:
             presentErrorAlert(onView: instance, message: genericErrorMessage)
@@ -32,10 +32,10 @@ class ErrorManager: UIViewController {
             presentErrorAlert(onView: instance, message: invalidApiCallAlertMessage)
         case .deviceAlreadyBorrowed:
             // Transfer ownership from previous user to current user
-            if let deviceId = id, instance is QRScannerController {
-                (instance as! QRScannerController).tryDeviceReturn(deviceId, completion: { (success) in
+            if let device = device, instance is QRScannerController {
+                (instance as! QRScannerController).tryDeviceReturn(device, completion: { (success) in
                     if success {
-                        (instance as! QRScannerController).tryDeviceBorrow(deviceId, completion: nil)
+                        (instance as! QRScannerController).tryDeviceBorrow("\(device.identifier)", completion: nil)
                     } else {
                         // TODO: error -- could not transfer ownership
                     }
