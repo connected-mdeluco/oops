@@ -29,13 +29,16 @@ class SnipeManager {
         case borrowHardware = "checkout/"
         case user = "users/"
     }
+
+    enum Locations: Int {
+        case safes = 4
+        case fuji = 20
+    }
     
     private static func getAPIKey(keyname: String) -> String {
         let filePath = Bundle.main.path(forResource: "Keys", ofType: "plist")
         let plist = NSDictionary(contentsOfFile: filePath!)
         var apiKey: String = plist?.object(forKey: keyname) as! String
-        apiKey.removeLast()
-        apiKey.removeFirst()
         return apiKey
     }
     
@@ -58,7 +61,7 @@ class SnipeManager {
         Alamofire.request(request)
     }
     
-    static func getDeviceName(forId id: String) -> Promise<String> {
+    static func getDevice(forId id: String) -> Promise<Device> {
         guard let unwrappedUrl = URL(string: apiUrl + CallType.hardware.rawValue + id)
             else {
                 return Promise { seal in
@@ -79,7 +82,7 @@ class SnipeManager {
                     switch response.result {
                     case .success(let json):
                         if let result = decodeObject(json, forType: ObjectType.deviceObject) as? Device {
-                            seal.fulfill(result.name)
+                            seal.fulfill(result)
                         } else {
                             if let statusCode = response.response?.statusCode {
                                 if statusCode == 200 {
@@ -116,7 +119,28 @@ class SnipeManager {
         request.setValue(key, forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
 
-        let body = ["checkout_to_type": "user", "assigned_user": user]
+        var body = ["checkout_to_type": "user", "assigned_user": user]
+
+        let expectedReturnDayCode = 6 // Friday
+
+        let calendar = Calendar(identifier: .gregorian)
+        let today = Date()
+
+        let expectedReturnDayComponents = DateComponents(calendar: calendar, weekday: expectedReturnDayCode)
+        let todayComponents = calendar.dateComponents([.weekday], from: today)
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+
+        if todayComponents.weekday != expectedReturnDayCode, // the device should be returned the same day if borrowed on the expected return day
+            let expectedReturnDate = calendar.nextDate(after: Date(), matching: expectedReturnDayComponents, matchingPolicy: .nextTime) {
+            let expectedCheckin = formatter.string(from: expectedReturnDate)
+            body["expected_checkin"] = expectedCheckin
+        } else {
+            let expectedCheckin = formatter.string(from: today)
+            body["expected_checkin"] = expectedCheckin
+        }
+
         let jsonData = try? JSONSerialization.data(withJSONObject: body, options: [])
         request.httpBody = jsonData
         
@@ -145,8 +169,8 @@ class SnipeManager {
             }
     }
     
-    static func returnDevice(withId id: String) -> Promise<String> {
-        guard let unwrappedUrl = URL(string: apiUrl + CallType.hardware.rawValue + id + "/" + CallType.returnHardware.rawValue)
+    static func returnDevice(device: Device) -> Promise<String> {
+        guard let unwrappedUrl = URL(string: apiUrl + CallType.hardware.rawValue + "\(device.identifier)" + "/" + CallType.returnHardware.rawValue)
         else {
             return Promise<String> { seal in
                 seal.reject(ErrorManager.SnipeError.genericError)
@@ -154,14 +178,26 @@ class SnipeManager {
         }
         
         let key = getAPIKey(keyname: apiKeyName)
-        
+
+        var request = URLRequest(url: unwrappedUrl)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue(key, forHTTPHeaderField: "Authorization")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+
+        var body: [String: Any] = ["name": device.name]
+
+        if device.assetTag.uppercased().hasPrefix("FB") {
+            body["location_id"] = Locations.fuji.rawValue
+        } else {
+            body["location_id"] = Locations.safes.rawValue
+        }
+
+        let jsonData = try? JSONSerialization.data(withJSONObject: body, options: [])
+        request.httpBody = jsonData
+
         return Promise { seal in
             Alamofire
-                .request(unwrappedUrl,
-                         method: .post,
-                         parameters: nil,
-                         encoding: URLEncoding.default,
-                         headers: ["Authorization":key])
+                .request(request)
                 .responseData(completionHandler: { (response) in
                     switch(response.result) {
                     case .success(let json):

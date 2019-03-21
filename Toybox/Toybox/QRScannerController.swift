@@ -22,7 +22,7 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
     private var employee: Employee?
     private var deviceIds = [String]()
     
-    var deviceNames = [String: String]()
+    var devices = [String: Device]()
     var videoCaptureSession: AVCaptureSession?
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var qrCodeFrameView: UIView?
@@ -156,9 +156,9 @@ class QRScannerController: UIViewController, AVCaptureMetadataOutputObjectsDeleg
 extension QRScannerController {
     
     func createDeviceConfirmationAlert() -> UIAlertController {
-        let devices = listOfDeviceNames()
+        let deviceNames = listOfDeviceNames()
         let deviceConfirmationAlert = UIAlertController(title: deviceScanConfirmationTitle + scanType.rawValue + ":",
-                                                        message: devices,
+                                                        message: deviceNames,
                                                         preferredStyle: .alert)
         // TODO: device confirmation alert is overriding potential error alerts.
         switch(scanType) {
@@ -167,8 +167,10 @@ extension QRScannerController {
                 tryDeviceBorrow(device, completion: nil)
             }
         case .returnDevice:
-            deviceIds.forEach { (device) in
-                tryDeviceReturn(device, completion: nil)
+            deviceIds.forEach { (deviceId) in
+                if let device = devices[deviceId] {
+                    tryDeviceReturn(device, completion: nil)
+                }
             }
         }
         deviceConfirmationAlert.addAction(UIAlertAction(title: alertTextOk, style: .default, handler: { _ in
@@ -279,82 +281,76 @@ extension QRScannerController {
 
 extension QRScannerController {
     func listOfDeviceNames() -> String? {
-        var devices: String? = ""
-        deviceNames.forEach({ (deviceId, deviceName) in
-            devices?.append("\(deviceName)\n")
+        var deviceNames: String? = ""
+        devices.forEach({ (deviceId, device) in
+            deviceNames?.append("\(device.name)\n")
         })
-        devices?.removeLast()
-        return devices
+        deviceNames?.removeLast()
+        return deviceNames
     }
     
     func appendDeviceBy(id: String) {
-        let promise = SnipeManager.getDeviceName(forId: id)
+        let promise = SnipeManager.getDevice(forId: id)
         promise.done { result in
-            let deviceName = result as String
-            self.deviceNames.updateValue(deviceName, forKey: id)
+            let device = result as Device
+            self.devices.updateValue(device, forKey: id)
             self.updateDeviceActionButton(forDeviceCount: self.deviceIds.count)
             self.videoCaptureSession?.stopRunning()
             self.presentDeviceScanSuccessAlert()
             self.playSound(withName: dingSound)
             }.catch { (error) in
                 let snipeError = error as! ErrorManager.SnipeError
-                ErrorManager.handleError(ofType: snipeError, withDeviceId: id, fromInstance: self)
+                ErrorManager.handleError(ofType: snipeError, withDevice: nil, fromInstance: self)
         }
     }
     
-    func tryDeviceBorrow(_ device: String, completion: ((_ success: Bool) -> Void)?) {
-         let promise = SnipeManager.borrowDevice(withId: device, toEmployee: String(employee!.id))
+    func tryDeviceBorrow(_ deviceId: String, completion: ((_ success: Bool) -> Void)?) {
+         let promise = SnipeManager.borrowDevice(withId: deviceId, toEmployee: String(employee!.id))
         var responseSucceeded = false
-        promise.done({ (status) in
+        promise.done({ [weak self] (status) in
             switch(status) {
             case StatusType.success.rawValue:
                 responseSucceeded = true
             case StatusType.failure.rawValue:
                 ErrorManager.handleError(ofType: .deviceAlreadyBorrowed,
-                                         withDeviceId: device,
+                                         withDevice: self?.devices[deviceId],
                                          fromInstance: self)
             default:
                 ErrorManager.handleError(ofType: .noConnectionAvailable,
-                                         withDeviceId: nil,
+                                         withDevice: nil,
                                          fromInstance: self)
             }
             completion?(responseSucceeded)
-        }).catch({ (error) in
+        }).catch({ [weak self] (error) in
             let snipeError = error as! ErrorManager.SnipeError
             ErrorManager.handleError(ofType: snipeError,
-                                     withDeviceId: device,
+                                     withDevice: self?.devices[deviceId],
                                      fromInstance: self)
             completion?(responseSucceeded)
         })
     }
     
-    func tryDeviceReturn(_ device: String, completion: ((_ success: Bool) ->Void)?) {
+    func tryDeviceReturn(_ device: Device, completion: ((_ success: Bool) ->Void)?) {
         var responseSucceeded = false
-        let promise = SnipeManager.returnDevice(withId: device)
+        let promise = SnipeManager.returnDevice(device: device)
         promise.done({ (status) in
             switch(status) {
             case StatusType.success.rawValue:
                 responseSucceeded = true
             case StatusType.failure.rawValue:
                 ErrorManager.handleError(ofType: .deviceAlreadyReturned,
-                                         withDeviceId: device,
+                                         withDevice: device,
                                          fromInstance: self)
             default:
                 ErrorManager.handleError(ofType: .noConnectionAvailable,
-                                         withDeviceId: nil,
+                                         withDevice: nil,
                                          fromInstance: self)
-            }
-            // NOTE: The asset name of a device is deleted when
-            // making a checkin request. We must therefore patch
-            // the device name upon completing a device return.
-            if let deviceName = self.deviceNames[device] {
-                SnipeManager.patchDeviceName(withId: device, forName: deviceName)
             }
             completion?(responseSucceeded)
         }).catch({ (error) in
             let snipeError = error as! ErrorManager.SnipeError
             ErrorManager.handleError(ofType: snipeError,
-                                     withDeviceId: nil,
+                                     withDevice: nil,
                                      fromInstance: self)
             responseSucceeded = false
             completion?(responseSucceeded)

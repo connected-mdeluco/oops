@@ -44,7 +44,7 @@ class AlphabeticalViewController: UIViewController, UITableViewDelegate, UITable
                 self.removeLoadingSpinner(spinner)
                 print("Error received when fetching users: \(error)")
                 let snipeError = error as! ErrorManager.SnipeError
-                ErrorManager.handleError(ofType: snipeError, withDeviceId: nil
+                ErrorManager.handleError(ofType: snipeError, withDevice: nil
                     , fromInstance: self)
         }
         
