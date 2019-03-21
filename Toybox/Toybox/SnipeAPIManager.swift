@@ -132,7 +132,7 @@ class SnipeManager {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
 
-        if todayComponents.weekday != expectedReturnDayCode,
+        if todayComponents.weekday != expectedReturnDayCode, // the device should be returned the same day if borrowed on the expected return day
             let expectedReturnDate = calendar.nextDate(after: Date(), matching: expectedReturnDayComponents, matchingPolicy: .nextTime) {
             let expectedCheckin = formatter.string(from: expectedReturnDate)
             body["expected_checkin"] = expectedCheckin
