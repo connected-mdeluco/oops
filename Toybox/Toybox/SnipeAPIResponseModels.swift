@@ -13,7 +13,15 @@ struct List: Codable {
 }
 
 struct Device: Codable {
+    var identifier: Int
     var name: String
+    var assetTag: String
+
+    enum CodingKeys: String, CodingKey {
+        case identifier = "id"
+        case name = "name"
+        case assetTag = "asset_tag"
+    }
 }
 
 struct Employee: Codable {
