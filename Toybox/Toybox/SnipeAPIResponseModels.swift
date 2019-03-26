@@ -8,19 +8,65 @@
 
 import Foundation
 
-struct List: Codable {
-    var rows: [Employee]
+struct List<T: Codable>: Codable {
+    var rows: [T]
 }
 
 struct Device: Codable {
-    var identifier: Int
-    var name: String
-    var assetTag: String
+    let identifier: Int
+    let name: String
+    let assetTag: String
+
+    let status: Status
+
+    let customFields: CustomFields?
+
+    let assignee: Assignee?
+
+    struct Status: Codable {
+        let statusMeta: StatusMetaTypes
+
+        enum StatusMetaTypes: String, Codable {
+            case deployed
+            case deployable
+            case undeployable
+            case pending
+        }
+
+        enum CodingKeys: String, CodingKey {
+            case statusMeta = "status_meta"
+        }
+    }
+
+    struct CustomFields: Codable {
+        let androidRelease: Release?
+        let iosRelease: Release?
+
+        struct Release: Codable {
+            let value: String?
+        }
+
+        enum CodingKeys: String, CodingKey {
+            case androidRelease = "Android Release"
+            case iosRelease = "iOS Release"
+        }
+    }
+
+    struct Assignee: Codable {
+        let name: String
+
+        enum CodingKeys: String, CodingKey {
+            case name = "name"
+        }
+    }
 
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
         case name = "name"
         case assetTag = "asset_tag"
+        case status = "status_label"
+        case customFields = "custom_fields"
+        case assignee = "assigned_to"
     }
 }
 

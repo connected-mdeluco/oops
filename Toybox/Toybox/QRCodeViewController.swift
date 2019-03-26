@@ -12,7 +12,8 @@ class QRCodeViewController: UIViewController {
     
     @IBOutlet weak var returnButton: UIButton!
     @IBOutlet weak var borrowButton: UIButton!
-    
+    @IBOutlet weak var lookupButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +22,9 @@ class QRCodeViewController: UIViewController {
         
         borrowButton.layer.cornerRadius = borrowButton.frame.height / 2
         borrowButton.clipsToBounds = true
+
+        lookupButton.layer.cornerRadius = lookupButton.frame.height / 2
+        lookupButton.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning() {
