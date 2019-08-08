@@ -20,7 +20,8 @@ class SnipeManager {
     enum ObjectType {
         case deviceObject
         case deviceActionResponseObject
-        case listObject
+        case employeeList
+        case deviceList
     }
     
     enum CallType: String {
@@ -245,7 +246,51 @@ class SnipeManager {
                 .responseData(completionHandler: { (response) in
                     switch response.result {
                     case .success(let json):
-                        if let result = decodeObject(json, forType: ObjectType.listObject) as? List {
+                        if let result = decodeObject(json, forType: ObjectType.employeeList) as? List<Employee> {
+                            seal.fulfill(result.rows)
+                        } else {
+                            if let statusCode = response.response?.statusCode {
+                                if statusCode == 200 {
+                                    seal.reject(ErrorManager.SnipeError.apiKeyInvalid)
+                                } else if statusCode == 404 {
+                                    seal.reject(ErrorManager.SnipeError.invalidApiCall)
+                                }
+                            } else {
+                                seal.reject(ErrorManager.SnipeError.genericError)
+                            }
+                        }
+                    case .failure:
+                        seal.reject(ErrorManager.SnipeError.noConnectionAvailable)
+                    }
+                })
+        }
+    }
+
+    // MARK: -Devices
+
+    static func getDevices() -> Promise<[Device]> {
+
+        guard let unwrappedUrl = URL(string: apiUrl + CallType.hardware.rawValue.dropLast())
+            else { return Promise<[Device]> { seal in
+                seal.reject(ErrorManager.SnipeError.genericError)
+                }
+        }
+
+        let theKey = getAPIKey(keyname: apiKeyName)
+
+        let parameters = ["limit": "500", "order": "asc"]
+
+        return Promise { seal in
+            Alamofire
+                .request(unwrappedUrl,
+                         method: .get,
+                         parameters: parameters,
+                         encoding: URLEncoding.default,
+                         headers: ["Authorization":theKey])
+                .responseData(completionHandler: { (response) in
+                    switch response.result {
+                    case .success(let json):
+                        if let result = decodeObject(json, forType: ObjectType.deviceList) as? List<Device> {
                             seal.fulfill(result.rows)
                         } else {
                             if let statusCode = response.response?.statusCode {
@@ -266,7 +311,11 @@ class SnipeManager {
     }
     
     private static func decodeObject(_ response: Data, forType type: ObjectType) -> Any? {
-        let jsonString = String(data: response, encoding: .utf8)
+        var jsonString = String(data: response, encoding: .utf8)
+
+        // custom_fields sometime show up as an empty array instead of dictionary which breaks parsing
+        jsonString = jsonString?.replacingOccurrences(of: "\"custom_fields\":[],", with: "")
+
         let jsonData = jsonString?.data(using: .utf8)
         if let unwrappedJsonData = jsonData {
             switch(type) {
@@ -276,9 +325,12 @@ class SnipeManager {
             case .deviceActionResponseObject:
                 let deviceActionResponse = try? JSONDecoder().decode(DeviceActionResponse.self, from: unwrappedJsonData)
                 return deviceActionResponse
-            case .listObject:
-                let employeesList = try? JSONDecoder().decode(List.self, from: unwrappedJsonData)
+            case .employeeList:
+                let employeesList = try? JSONDecoder().decode(List<Employee>.self, from: unwrappedJsonData)
                 return employeesList
+            case .deviceList:
+                let deviceList = try? JSONDecoder().decode(List<Device>.self, from: unwrappedJsonData)
+                return deviceList
             }
         } else {
             return nil
