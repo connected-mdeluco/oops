@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="j0c-uR-gfQ">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Scanner View Controller-->
+        <scene sceneID="DJY-Wy-SYh">
+            <objects>
+                <viewController id="j0c-uR-gfQ" userLabel="Scanner View Controller" customClass="ScannerViewController" customModule="Toybox" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YNk-ta-hZ6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="ⓣⓞⓨ ⓑⓞⓧ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="koY-Jl-f7v">
+                                <rect key="frame" x="113" y="44" width="188.5" height="36"/>
+                                <color key="tintColor" red="0.34901960780000002" green="0.63137254899999995" blue="0.89019607840000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NON-C7-ya9" userLabel="Scanner View">
+                                <rect key="frame" x="0.0" y="88" width="414" height="179"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="NON-C7-ya9" firstAttribute="height" secondItem="YNk-ta-hZ6" secondAttribute="height" multiplier="0.2" id="CoH-E9-O4b"/>
+                            <constraint firstItem="koY-Jl-f7v" firstAttribute="top" secondItem="9Ja-73-6pP" secondAttribute="top" id="VKD-L4-nPl"/>
+                            <constraint firstItem="koY-Jl-f7v" firstAttribute="centerX" secondItem="YNk-ta-hZ6" secondAttribute="centerX" id="bdk-ta-lwW"/>
+                            <constraint firstItem="NON-C7-ya9" firstAttribute="width" secondItem="YNk-ta-hZ6" secondAttribute="width" id="hb1-e1-9pe"/>
+                            <constraint firstItem="NON-C7-ya9" firstAttribute="centerX" secondItem="9Ja-73-6pP" secondAttribute="centerX" id="nNT-UW-4q5"/>
+                            <constraint firstItem="NON-C7-ya9" firstAttribute="top" secondItem="koY-Jl-f7v" secondAttribute="bottom" constant="8" id="pr7-I3-tDL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="9Ja-73-6pP"/>
+                    </view>
+                    <connections>
+                        <outlet property="scannerView" destination="NON-C7-ya9" id="dMW-3I-37S"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="V5M-3H-zXS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-162.31884057971016" y="143.97321428571428"/>
+        </scene>
+    </scenes>
+</document>

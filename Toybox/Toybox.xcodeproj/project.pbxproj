@@ -20,6 +20,8 @@
 		F4BB49892152A84500F74744 /* SnipeAPIResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB49882152A84500F74744 /* SnipeAPIResponseModels.swift */; };
 		F4BB498D21552FEE00F74744 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB498C21552FEE00F74744 /* ErrorManager.swift */; };
 		F4BB498F215D70DC00F74744 /* StringLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB498E215D70DB00F74744 /* StringLiterals.swift */; };
+		F4E7C6802301A7D700382AE2 /* ScanFirst.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4E7C67F2301A7D700382AE2 /* ScanFirst.storyboard */; };
+		F4E7C6822301ABAB00382AE2 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E7C6812301ABAB00382AE2 /* ScannerViewController.swift */; };
 		F4F09DB71DAF669400026BB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F09DB61DAF669400026BB2 /* AppDelegate.swift */; };
 		F4F09DBC1DAF669400026BB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4F09DBA1DAF669400026BB2 /* Main.storyboard */; };
 		F4F09DBE1DAF669400026BB2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4F09DBD1DAF669400026BB2 /* Assets.xcassets */; };
@@ -63,6 +65,8 @@
 		F4BB49882152A84500F74744 /* SnipeAPIResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnipeAPIResponseModels.swift; sourceTree = "<group>"; };
 		F4BB498C21552FEE00F74744 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		F4BB498E215D70DB00F74744 /* StringLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLiterals.swift; sourceTree = "<group>"; };
+		F4E7C67F2301A7D700382AE2 /* ScanFirst.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScanFirst.storyboard; sourceTree = "<group>"; };
+		F4E7C6812301ABAB00382AE2 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
 		F4F09DB31DAF669400026BB2 /* Toybox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Toybox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4F09DB61DAF669400026BB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4F09DBB1DAF669400026BB2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -158,6 +162,8 @@
 				F4F09DC21DAF669400026BB2 /* Info.plist */,
 				F499B2FF216F93B000F59810 /* Keys.plist */,
 				F4F09DBA1DAF669400026BB2 /* Main.storyboard */,
+				F4E7C67F2301A7D700382AE2 /* ScanFirst.storyboard */,
+				F4E7C6812301ABAB00382AE2 /* ScannerViewController.swift */,
 				F4F09DC81DAF6A3800026BB2 /* QRCodeViewController.swift */,
 				F4F09DCA1DAF6A4F00026BB2 /* QRScannerController.swift */,
 				F4432264214954E800A25CA2 /* AlphabeticalViewController.swift */,
@@ -243,6 +249,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -269,6 +276,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4E7C6802301A7D700382AE2 /* ScanFirst.storyboard in Resources */,
 				F499B300216F93B000F59810 /* Keys.plist in Resources */,
 				F4F09DC11DAF669400026BB2 /* LaunchScreen.storyboard in Resources */,
 				F4F09DBE1DAF669400026BB2 /* Assets.xcassets in Resources */,
@@ -361,6 +369,7 @@
 				F4432279214FF54600A25CA2 /* SnipeAPIManager.swift in Sources */,
 				46415C8522453BE80092751D /* DevicesViewController.swift in Sources */,
 				F4F09DB71DAF669400026BB2 /* AppDelegate.swift in Sources */,
+				F4E7C6822301ABAB00382AE2 /* ScannerViewController.swift in Sources */,
 				F4F09DCB1DAF6A4F00026BB2 /* QRScannerController.swift in Sources */,
 				F44322672149637600A25CA2 /* EmployeeTableViewCell.swift in Sources */,
 			);
