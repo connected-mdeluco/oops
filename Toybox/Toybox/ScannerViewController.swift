@@ -9,7 +9,8 @@
 import AVFoundation
 import UIKit
 
-class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
+class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UITableViewDataSource, UITableViewDelegate {
+
     @IBOutlet var scannerView: UIView!
     
     private var employee: Employee?
@@ -27,7 +28,6 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         setUpVideoCaptureSession()
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -38,6 +38,8 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
     */
     
+    // MARK: - AV
+
     func setUpVideoCaptureSession() {
         let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera],
                                                                       mediaType: AVMediaType.video,
@@ -83,5 +85,19 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
         
         // Start video capture
         videoCaptureSession?.startRunning()
+    }
+}
+
+/*
+ // MARK: - TableView
+ */
+extension ScannerViewController {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DeviceTableViewCell.identifier, for: indexPath)
+        return cell
     }
 }

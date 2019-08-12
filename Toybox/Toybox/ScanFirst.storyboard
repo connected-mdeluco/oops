@@ -29,13 +29,52 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="179"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sSP-4y-Kc5" userLabel="Main View">
+                                <rect key="frame" x="0.0" y="275" width="414" height="621"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Device List" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OaK-kL-GgR">
+                                        <rect key="frame" x="163" y="0.0" width="88" height="21"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U5T-nd-W40">
+                                        <rect key="frame" x="8" y="29" width="398" height="592"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="HUp-J9-qAa">
+                                                <rect key="frame" x="0.0" y="28" width="398" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HUp-J9-qAa" id="NJ9-gx-tJa">
+                                                    <rect key="frame" x="0.0" y="0.0" width="398" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="U5T-nd-W40" firstAttribute="centerX" secondItem="sSP-4y-Kc5" secondAttribute="centerX" id="5Yg-WL-8tk"/>
+                                    <constraint firstItem="OaK-kL-GgR" firstAttribute="top" secondItem="sSP-4y-Kc5" secondAttribute="top" id="cQY-x3-ocr"/>
+                                    <constraint firstItem="OaK-kL-GgR" firstAttribute="centerX" secondItem="sSP-4y-Kc5" secondAttribute="centerX" id="doW-ha-rBk"/>
+                                    <constraint firstItem="U5T-nd-W40" firstAttribute="top" secondItem="OaK-kL-GgR" secondAttribute="bottom" constant="8" id="mjp-fQ-gLP"/>
+                                    <constraint firstItem="U5T-nd-W40" firstAttribute="leading" secondItem="sSP-4y-Kc5" secondAttribute="leading" constant="8" id="oeW-x7-Rf2"/>
+                                    <constraint firstAttribute="bottom" secondItem="U5T-nd-W40" secondAttribute="bottom" id="oiO-4F-pOW"/>
+                                    <constraint firstAttribute="trailing" secondItem="U5T-nd-W40" secondAttribute="trailing" constant="8" id="vE2-nC-9w7"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="sSP-4y-Kc5" firstAttribute="centerX" secondItem="YNk-ta-hZ6" secondAttribute="centerX" id="6aT-NL-yYh"/>
                             <constraint firstItem="NON-C7-ya9" firstAttribute="height" secondItem="YNk-ta-hZ6" secondAttribute="height" multiplier="0.2" id="CoH-E9-O4b"/>
+                            <constraint firstItem="sSP-4y-Kc5" firstAttribute="width" secondItem="YNk-ta-hZ6" secondAttribute="width" id="HhT-Qx-yol"/>
+                            <constraint firstItem="sSP-4y-Kc5" firstAttribute="top" secondItem="NON-C7-ya9" secondAttribute="bottom" constant="8" id="Ou8-pL-nzp"/>
                             <constraint firstItem="koY-Jl-f7v" firstAttribute="top" secondItem="9Ja-73-6pP" secondAttribute="top" id="VKD-L4-nPl"/>
                             <constraint firstItem="koY-Jl-f7v" firstAttribute="centerX" secondItem="YNk-ta-hZ6" secondAttribute="centerX" id="bdk-ta-lwW"/>
                             <constraint firstItem="NON-C7-ya9" firstAttribute="width" secondItem="YNk-ta-hZ6" secondAttribute="width" id="hb1-e1-9pe"/>
+                            <constraint firstAttribute="bottom" secondItem="sSP-4y-Kc5" secondAttribute="bottom" id="moR-bs-gWa"/>
                             <constraint firstItem="NON-C7-ya9" firstAttribute="centerX" secondItem="9Ja-73-6pP" secondAttribute="centerX" id="nNT-UW-4q5"/>
                             <constraint firstItem="NON-C7-ya9" firstAttribute="top" secondItem="koY-Jl-f7v" secondAttribute="bottom" constant="8" id="pr7-I3-tDL"/>
                         </constraints>
