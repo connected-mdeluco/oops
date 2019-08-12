@@ -88,9 +88,9 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     }
 }
 
-/*
- // MARK: - TableView
- */
+
+// MARK: - TableView
+
 extension ScannerViewController {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 0
@@ -99,5 +99,61 @@ extension ScannerViewController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DeviceTableViewCell.identifier, for: indexPath)
         return cell
+    }
+}
+
+// MARK: - QR Code
+
+extension ScannerViewController {
+    func isValidQRCode(_ message: String) -> Bool {
+        return message.hasPrefix(SnipeManager.urlPrefix)
+    }
+    
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        
+        if metadataObjects.count == 0 {
+            qrCodeFrameView?.frame = CGRect.zero
+            return
+        }
+        
+        // Get the metadata object
+        let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
+        if metadataObj.type == AVMetadataObject.ObjectType.qr {
+            createQRBorder(metadataObj)
+            var messageText: String = ""
+            
+            // Retrieve string message from metadata
+            if metadataObj.stringValue != nil {
+                if let unwrappedMessageText = metadataObj.stringValue {
+                    messageText = unwrappedMessageText
+                }
+            }
+            
+            if isValidQRCode(messageText) {
+                let deviceId = parseQRMessage(messageText)
+                // TODO - logic for checkout, return, xfer
+            }
+        }
+    }
+    
+    func parseQRMessage(_ message: String) -> String? {
+        let range = SnipeManager.urlPrefix.startIndex..<SnipeManager.urlPrefix.endIndex
+        var mutableMessage = message
+        mutableMessage.removeSubrange(range)
+        let id = Int(mutableMessage)
+        if id != nil && !deviceIds.contains(mutableMessage) {
+            deviceIds.append(mutableMessage)
+            return mutableMessage
+        }
+        return nil
+    }
+    
+    func createQRBorder(_ metadataObj : AVMetadataObject) {
+        let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
+        qrCodeFrameView?.frame = barCodeObject!.bounds
+        qrCodeFrameView?.layer.borderColor = UIColor.green.cgColor
+        qrCodeFrameView?.layer.borderWidth = 2
+        scannerView.addSubview(qrCodeFrameView!)
+        scannerView.bringSubviewToFront(qrCodeFrameView!)
     }
 }
