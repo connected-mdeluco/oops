@@ -14,12 +14,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     @IBOutlet var cameraView: UIView!
     @IBOutlet var scannerView: UIView!
     
-    private var employee: Employee?
-    private var deviceIds = [String]()
-    
-    var devices = [String: Device]()
-    var videoCaptureSession: AVCaptureSession?
-    var player: AVAudioPlayer?
+    var deviceIds = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,42 +92,22 @@ extension ScannerViewController {
         return message.hasPrefix(SnipeManager.urlPrefix)
     }
     
-    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
-        
-        if metadataObjects.count == 0 {
-            return
+    func parseDeviceId(fromMessage message: String) -> String? {
+        if !isValidQRCode(message) {
+            return nil
         }
-        
-        // Get the metadata object
-        let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
-        if metadataObj.type == AVMetadataObject.ObjectType.qr {
-            var messageText: String = ""
-            
-            // Retrieve string message from metadata
-            if metadataObj.stringValue != nil {
-                if let unwrappedMessageText = metadataObj.stringValue {
-                    messageText = unwrappedMessageText
-                }
-            }
-            
-            if isValidQRCode(messageText) {
-                let deviceId = parseQRMessage(messageText)
-                // TODO - logic for checkout, return, xfer
-            }
-
-            print("QR Code Found: \(messageText)")
-        }
+        return message.replacingOccurrences(of: SnipeManager.urlPrefix, with: "")
     }
-    
-    func parseQRMessage(_ message: String) -> String? {
-        let range = SnipeManager.urlPrefix.startIndex..<SnipeManager.urlPrefix.endIndex
-        var mutableMessage = message
-        mutableMessage.removeSubrange(range)
-        let id = Int(mutableMessage)
-        if id != nil && !deviceIds.contains(mutableMessage) {
-            deviceIds.append(mutableMessage)
-            return mutableMessage
-        }
-        return nil
+
+    func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
+        // Process only one code at a time
+        guard metadataObjects.indices.contains(0),
+            let metadataObject = metadataObjects[0] as? AVMetadataMachineReadableCodeObject,
+            metadataObject.type == AVMetadataObject.ObjectType.qr,
+            let message = metadataObject.stringValue,
+            let deviceId = parseDeviceId(fromMessage: message) else { return }
+
+        // TODO: Use deviceId
+        print("QR Code Found: \(deviceId)")
     }
 }
