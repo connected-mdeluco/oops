@@ -11,6 +11,7 @@ import UIKit
 
 class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UITableViewDataSource, UITableViewDelegate {
 
+    @IBOutlet var cameraView: UIView!
     @IBOutlet var scannerView: UIView!
     
     private var employee: Employee?
@@ -18,14 +19,16 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     
     var devices = [String: Device]()
     var videoCaptureSession: AVCaptureSession?
-    var videoPreviewLayer: AVCaptureVideoPreviewLayer?
-    var qrCodeFrameView: UIView?
     var player: AVAudioPlayer?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpVideoCaptureSession()
+
+        scannerView.layer.borderColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
+        scannerView.layer.borderWidth = 2
+        cameraView.bringSubviewToFront(scannerView)
     }
     
     /*
@@ -45,47 +48,32 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
                                                                       mediaType: AVMediaType.video,
                                                                       position: .front)
         
-        guard let captureDevice = deviceDiscoverySession.devices.first else {
-            print("Failed to get the camera device")
-            return
-        }
+        guard let captureDevice = deviceDiscoverySession.devices.first,
+            let input = try? AVCaptureDeviceInput(device: captureDevice)
+            else {
+                print("Failed to get the camera device")
+                return
+            }
         
-        do {
-            // Get an instance of the AVCaptureDeviceInput class using the previous device object.
-            let input = try AVCaptureDeviceInput(device: captureDevice)
-            
-            videoCaptureSession = AVCaptureSession()
-            
-            // Set the input device on the capture session.
-            videoCaptureSession?.addInput(input)
-            
-            let captureMetadataOutput = AVCaptureMetadataOutput()
-            videoCaptureSession?.addOutput(captureMetadataOutput)
-            
-            // Set delegate and use the default dispatch queue to execute the call back
-            captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
-            captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
-            
-            // Initialize QR Code Frame to highlight the QR code
-            qrCodeFrameView = UIView()
-            
-        } catch {
-            // If any error occurs, simply print it out and don't continue any more.
-            print(error)
-            return
-        }
+        let videoCaptureSession = AVCaptureSession()
+        videoCaptureSession.addInput(input)
+
+        let captureMetadataOutput = AVCaptureMetadataOutput()
+        videoCaptureSession.addOutput(captureMetadataOutput)
+
+        captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
+
+        let videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoCaptureSession)
+        videoPreviewLayer.videoGravity = .resizeAspectFill
+        videoPreviewLayer.frame = cameraView.bounds
+        cameraView.layer.addSublayer(videoPreviewLayer)
+        videoCaptureSession.startRunning()
         
-        if let captureSession = videoCaptureSession {
-            // Initialize the video preview layer and add it as a sublayer to the viewPreview view's layer.
-            videoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-            videoPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-            videoPreviewLayer?.frame = scannerView.layer.bounds
-            scannerView.layer.addSublayer(videoPreviewLayer!)
-        }
-        
-        // Start video capture
-        videoCaptureSession?.startRunning()
+        // For reasons unknown, in order to work as expected this must appear after startRunning().
+        captureMetadataOutput.rectOfInterest = videoPreviewLayer.metadataOutputRectConverted(fromLayerRect: scannerView.frame)
     }
+
 }
 
 
@@ -112,14 +100,12 @@ extension ScannerViewController {
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
         
         if metadataObjects.count == 0 {
-            qrCodeFrameView?.frame = CGRect.zero
             return
         }
         
         // Get the metadata object
         let metadataObj = metadataObjects[0] as! AVMetadataMachineReadableCodeObject
         if metadataObj.type == AVMetadataObject.ObjectType.qr {
-            createQRBorder(metadataObj)
             var messageText: String = ""
             
             // Retrieve string message from metadata
@@ -133,6 +119,8 @@ extension ScannerViewController {
                 let deviceId = parseQRMessage(messageText)
                 // TODO - logic for checkout, return, xfer
             }
+
+            print("QR Code Found: \(messageText)")
         }
     }
     
@@ -146,14 +134,5 @@ extension ScannerViewController {
             return mutableMessage
         }
         return nil
-    }
-    
-    func createQRBorder(_ metadataObj : AVMetadataObject) {
-        let barCodeObject = videoPreviewLayer?.transformedMetadataObject(for: metadataObj)
-        qrCodeFrameView?.frame = barCodeObject!.bounds
-        qrCodeFrameView?.layer.borderColor = UIColor.green.cgColor
-        qrCodeFrameView?.layer.borderWidth = 2
-        scannerView.addSubview(qrCodeFrameView!)
-        scannerView.bringSubviewToFront(qrCodeFrameView!)
     }
 }
