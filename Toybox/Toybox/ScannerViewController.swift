@@ -39,11 +39,7 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
     // MARK: - AV
 
     func setUpVideoCaptureSession() {
-        let deviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera],
-                                                                      mediaType: AVMediaType.video,
-                                                                      position: .front)
-        
-        guard let captureDevice = deviceDiscoverySession.devices.first,
+        guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
             let input = try? AVCaptureDeviceInput(device: captureDevice)
             else {
                 print("Failed to get the camera device")
