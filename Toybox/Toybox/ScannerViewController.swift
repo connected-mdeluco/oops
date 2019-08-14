@@ -105,11 +105,11 @@ extension ScannerViewController {
         return message.hasPrefix(SnipeManager.urlPrefix)
     }
     
-    func parseDeviceId(fromMessage message: String) -> String? {
-        if !isValidQRCode(message) {
+    func parseDeviceId(fromQRCode code: String) -> String? {
+        if !isValidQRCode(code) {
             return nil
         }
-        return message.replacingOccurrences(of: SnipeManager.urlPrefix, with: "")
+        return code.replacingOccurrences(of: SnipeManager.urlPrefix, with: "")
     }
 
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection) {
@@ -117,9 +117,9 @@ extension ScannerViewController {
         guard metadataObjects.indices.contains(0),
             let metadataObject = metadataObjects[0] as? AVMetadataMachineReadableCodeObject,
             metadataObject.type == AVMetadataObject.ObjectType.qr,
-            let message = metadataObject.stringValue else { return }
+            let qrCode = metadataObject.stringValue else { return }
 
-        didScan(QRCode: message)
+        didScan(QRCode: qrCode)
     }
 
     func didScan(QRCode code: String) {
