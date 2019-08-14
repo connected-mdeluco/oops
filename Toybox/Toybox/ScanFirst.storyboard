@@ -55,11 +55,11 @@
                                         <rect key="frame" x="8" y="29" width="359" height="432.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" textLabel="opB-bI-URs" detailTextLabel="ueN-MC-PW5" style="IBUITableViewCellStyleSubtitle" id="HUp-J9-qAa">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DeviceCell" textLabel="opB-bI-URs" detailTextLabel="ueN-MC-PW5" style="IBUITableViewCellStyleSubtitle" id="HUp-J9-qAa">
                                                 <rect key="frame" x="0.0" y="28" width="359" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HUp-J9-qAa" id="NJ9-gx-tJa">
-                                                    <rect key="frame" x="0.0" y="0.0" width="292" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="359" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="opB-bI-URs">
@@ -111,6 +111,7 @@
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="NON-C7-ya9" id="dMW-3I-37S"/>
+                        <outlet property="deviceTableView" destination="U5T-nd-W40" id="JGz-Dl-zPT"/>
                         <outlet property="scannerView" destination="zP9-QC-2eU" id="Qda-U5-uGP"/>
                     </connections>
                 </viewController>

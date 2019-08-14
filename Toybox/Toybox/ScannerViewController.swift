@@ -7,6 +7,7 @@
 //
 
 import AVFoundation
+import PromiseKit
 import UIKit
 
 class ScannerViewController: UIViewController,
@@ -16,11 +17,15 @@ UITableViewDelegate {
 
     @IBOutlet var cameraView: UIView!
     @IBOutlet var scannerView: UIView!
-    
-    var deviceIds = [String]()
+    @IBOutlet var deviceTableView: UITableView!
+
+    var scannedCodes = [String]()
+    var devices = [String:Device]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        deviceTableView.delegate = self
+        deviceTableView.dataSource = self
 
         setUpVideoCaptureSession()
 
@@ -73,16 +78,21 @@ UITableViewDelegate {
 
 }
 
-
 // MARK: - TableView
 
 extension ScannerViewController {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return scannedCodes.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: DeviceTableViewCell.identifier, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DeviceCell", for: indexPath)
+        let deviceId = scannedCodes[indexPath.row]
+        guard let device = devices[deviceId] else { return cell }
+
+        cell.textLabel?.text = device.name
+        cell.detailTextLabel?.text = device.status.statusMeta == .deployable ? "Checkout" : "Return"
+
         return cell
     }
 }
@@ -112,7 +122,25 @@ extension ScannerViewController {
     }
 
     func didScan(QRCode code: String) {
-        guard let deviceId = parseDeviceId(fromMessage: code) else { return }
-        print("Device Scanned: \(deviceId)")
+        guard let deviceId = parseDeviceId(fromQRCode: code),
+            !scannedCodes.contains(deviceId) else { return }
+
+        print("New device Scanned: \(deviceId)")
+        scannedCodes.append(deviceId)
+        self.deviceFrom(deviceId: deviceId)
+    }
+}
+
+// MARK: - Devices
+extension ScannerViewController {
+    func deviceFrom(deviceId id: String) {
+        firstly {
+            SnipeManager.getDevice(forId: id)
+            }.done { result in
+                self.devices[id] = result
+                self.deviceTableView.reloadData()
+            }.catch { error in
+                self.scannedCodes.removeAll(where: { $0 == id })
+            }
     }
 }
