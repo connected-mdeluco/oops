@@ -21,6 +21,7 @@ UITableViewDelegate {
 
     var scannedCodes = [String]()
     var devices = [String:Device]()
+    let qrScannerQueue = DispatchQueue(label: "qrScannerQueue")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,7 +64,7 @@ UITableViewDelegate {
         videoCaptureSession.addOutput(captureMetadataOutput)
         videoCaptureSession.commitConfiguration()
 
-        captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
+        captureMetadataOutput.setMetadataObjectsDelegate(self, queue: qrScannerQueue)
         captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
 
         videoPreviewLayer.videoGravity = .resizeAspectFill
