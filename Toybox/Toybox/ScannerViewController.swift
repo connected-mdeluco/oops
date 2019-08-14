@@ -9,7 +9,10 @@
 import AVFoundation
 import UIKit
 
-class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate, UITableViewDataSource, UITableViewDelegate {
+class ScannerViewController: UIViewController,
+AVCaptureMetadataOutputObjectsDelegate,
+UITableViewDataSource,
+UITableViewDelegate {
 
     @IBOutlet var cameraView: UIView!
     @IBOutlet var scannerView: UIView!
@@ -47,18 +50,21 @@ class ScannerViewController: UIViewController, AVCaptureMetadataOutputObjectsDel
             }
         
         let videoCaptureSession = AVCaptureSession()
-        videoCaptureSession.addInput(input)
-
         let captureMetadataOutput = AVCaptureMetadataOutput()
+        let videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoCaptureSession)
+
+        videoCaptureSession.beginConfiguration()
+        videoCaptureSession.addInput(input)
         videoCaptureSession.addOutput(captureMetadataOutput)
+        videoCaptureSession.commitConfiguration()
 
         captureMetadataOutput.setMetadataObjectsDelegate(self, queue: DispatchQueue.main)
         captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
 
-        let videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoCaptureSession)
         videoPreviewLayer.videoGravity = .resizeAspectFill
         videoPreviewLayer.frame = cameraView.bounds
         cameraView.layer.addSublayer(videoPreviewLayer)
+
         videoCaptureSession.startRunning()
         
         // For reasons unknown, in order to work as expected this must appear after startRunning().
@@ -100,10 +106,13 @@ extension ScannerViewController {
         guard metadataObjects.indices.contains(0),
             let metadataObject = metadataObjects[0] as? AVMetadataMachineReadableCodeObject,
             metadataObject.type == AVMetadataObject.ObjectType.qr,
-            let message = metadataObject.stringValue,
-            let deviceId = parseDeviceId(fromMessage: message) else { return }
+            let message = metadataObject.stringValue else { return }
 
-        // TODO: Use deviceId
-        print("QR Code Found: \(deviceId)")
+        didScan(QRCode: message)
+    }
+
+    func didScan(QRCode code: String) {
+        guard let deviceId = parseDeviceId(fromMessage: code) else { return }
+        print("Device Scanned: \(deviceId)")
     }
 }
