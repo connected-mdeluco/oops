@@ -16,6 +16,7 @@
 		F44322672149637600A25CA2 /* EmployeeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44322662149637600A25CA2 /* EmployeeTableViewCell.swift */; };
 		F4432271214AE1C700A25CA2 /* QRCodeReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4432270214AE1C700A25CA2 /* QRCodeReaderTests.swift */; };
 		F4432279214FF54600A25CA2 /* SnipeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4432278214FF54600A25CA2 /* SnipeAPIManager.swift */; };
+		F48218F32305922400C9BC14 /* ConnectorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48218F22305922400C9BC14 /* ConnectorTableViewController.swift */; };
 		F499B300216F93B000F59810 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = F499B2FF216F93B000F59810 /* Keys.plist */; };
 		F4BB49892152A84500F74744 /* SnipeAPIResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB49882152A84500F74744 /* SnipeAPIResponseModels.swift */; };
 		F4BB498D21552FEE00F74744 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB498C21552FEE00F74744 /* ErrorManager.swift */; };
@@ -62,6 +63,7 @@
 		F4432270214AE1C700A25CA2 /* QRCodeReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeReaderTests.swift; sourceTree = "<group>"; };
 		F4432272214AE1C700A25CA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F4432278214FF54600A25CA2 /* SnipeAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnipeAPIManager.swift; sourceTree = "<group>"; };
+		F48218F22305922400C9BC14 /* ConnectorTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectorTableViewController.swift; sourceTree = "<group>"; };
 		F499B2FF216F93B000F59810 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		F4BB49882152A84500F74744 /* SnipeAPIResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnipeAPIResponseModels.swift; sourceTree = "<group>"; };
 		F4BB498C21552FEE00F74744 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				F4E7C67F2301A7D700382AE2 /* ScanFirst.storyboard */,
 				F4E7C68723049A4E00382AE2 /* Button.swift */,
 				F4E7C6812301ABAB00382AE2 /* ScannerViewController.swift */,
+				F48218F22305922400C9BC14 /* ConnectorTableViewController.swift */,
 				F4F09DC81DAF6A3800026BB2 /* QRCodeViewController.swift */,
 				F4F09DCA1DAF6A4F00026BB2 /* QRScannerController.swift */,
 				F4432264214954E800A25CA2 /* AlphabeticalViewController.swift */,
@@ -374,6 +377,7 @@
 				F4F09DB71DAF669400026BB2 /* AppDelegate.swift in Sources */,
 				F4E7C6822301ABAB00382AE2 /* ScannerViewController.swift in Sources */,
 				F4F09DCB1DAF6A4F00026BB2 /* QRScannerController.swift in Sources */,
+				F48218F32305922400C9BC14 /* ConnectorTableViewController.swift in Sources */,
 				F4E7C68823049A4E00382AE2 /* Button.swift in Sources */,
 				F44322672149637600A25CA2 /* EmployeeTableViewCell.swift in Sources */,
 			);
