@@ -72,18 +72,32 @@ class ConnectorViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectorCell", for: indexPath)
 
-        let keyIndex = connectors.keys.index(of: sortedConnectorKeys[indexPath.section])
-        let employees = connectors[keyIndex!].value
-        let employee = employees[indexPath.row]
-
+        let employee = employeeObject(forRowAt: indexPath)
         cell.textLabel?.text = employee.name
 
         return cell
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let employee = employeeObject(forRowAt: indexPath)
+
+        let alertController = UIAlertController(title: "\(employee.name)", message: "Confirm device selection", preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        alertController.addAction(cancelAction)
+        alertController.popoverPresentationController?.sourceView = self.view
+        present(alertController, animated: true, completion: nil)
+    }
+
     func characterString(fromString string: String, atPosition position: Int) -> String {
         let index = string.index(string.startIndex, offsetBy: position)
         return String(string[index])
+    }
+
+    func employeeObject(forRowAt indexPath: IndexPath) -> Employee {
+        let keyIndex = connectors.keys.index(of: sortedConnectorKeys[indexPath.section])
+        let employees = connectors[keyIndex!].value
+        return employees[indexPath.row]
     }
 
     /*
