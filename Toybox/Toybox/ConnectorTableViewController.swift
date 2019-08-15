@@ -11,7 +11,12 @@ import UIKit
 
 class ConnectorTableViewController: UITableViewController {
 
-    var connectors = [String:[Employee]]()
+    private var sortedConnectorKeys = [String]()
+    var connectors = [String:[Employee]]() {
+        didSet {
+            sortedConnectorKeys = connectors.keys.sorted()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,25 +46,22 @@ class ConnectorTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sortedKeys = connectors.keys.sorted()
-        let keyIndex = connectors.keys.index(of: sortedKeys[section])
+        let keyIndex = connectors.keys.index(of: sortedConnectorKeys[section])
         return connectors[keyIndex!].value.count
     }
 
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return connectors.keys.sorted()
+        return sortedConnectorKeys
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let sortedKeys = connectors.keys.sorted()
-        return sortedKeys[section]
+        return sortedConnectorKeys[section]
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectorCell", for: indexPath)
 
-        let sortedKeys = connectors.keys.sorted()
-        let keyIndex = connectors.keys.index(of: sortedKeys[indexPath.section])
+        let keyIndex = connectors.keys.index(of: sortedConnectorKeys[indexPath.section])
         let employees = connectors[keyIndex!].value
         let employee = employees[indexPath.row]
 
