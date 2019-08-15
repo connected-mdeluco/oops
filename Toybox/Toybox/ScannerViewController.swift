@@ -18,9 +18,18 @@ UITableViewDelegate {
     @IBOutlet var cameraView: UIView!
     @IBOutlet var scannerView: UIView!
     @IBOutlet var deviceTableView: UITableView!
+    @IBOutlet var confirmButton: UIButton!
+    @IBOutlet var cancelButton: UIButton!
 
     var scannedCodes = [String]()
-    var devices = [String:Device]()
+    var devices = [String:Device]() {
+        didSet {
+            if devices.count == 0 {
+                scannedCodes.removeAll()
+            }
+            updateButtons()
+        }
+    }
     let qrScannerQueue = DispatchQueue(label: "qrScannerQueue")
     
     override func viewDidLoad() {
@@ -28,6 +37,7 @@ UITableViewDelegate {
         deviceTableView.delegate = self
         deviceTableView.dataSource = self
 
+        updateButtons()
         setUpVideoCaptureSession()
 
         scannerView.layer.borderColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
@@ -78,6 +88,25 @@ UITableViewDelegate {
         
         // For reasons unknown, in order to work as expected this must appear after startRunning().
         captureMetadataOutput.rectOfInterest = videoPreviewLayer.metadataOutputRectConverted(fromLayerRect: scannerView.frame)
+    }
+
+    // MARK: - Actions
+
+    @IBAction func cancelAction(_ sender: Any) {
+        devices.removeAll()
+        deviceTableView.reloadData()
+    }
+
+    // MARK: - Utility functions
+
+    func updateButtons() {
+        let isEnabled = devices.count > 0 ? true : false
+        confirmButton.isEnabled = isEnabled
+        cancelButton.isEnabled = isEnabled
+
+        let alpha = CGFloat(isEnabled ? 1.0 : 0.5)
+        confirmButton.alpha = alpha
+        cancelButton.alpha = alpha
     }
 
 }

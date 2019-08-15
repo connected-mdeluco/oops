@@ -100,6 +100,9 @@
                                                         <real key="value" value="5"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
+                                                <connections>
+                                                    <action selector="cancelAction:" destination="j0c-uR-gfQ" eventType="touchUpInside" id="bEb-u0-JbD"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fKx-up-kN7">
                                                 <rect key="frame" x="183.5" y="0.0" width="175.5" height="48"/>
@@ -156,6 +159,8 @@
                     </view>
                     <connections>
                         <outlet property="cameraView" destination="NON-C7-ya9" id="dMW-3I-37S"/>
+                        <outlet property="cancelButton" destination="r4F-Bx-pIV" id="g3V-J5-dWs"/>
+                        <outlet property="confirmButton" destination="fKx-up-kN7" id="BT7-J2-Qht"/>
                         <outlet property="deviceTableView" destination="U5T-nd-W40" id="JGz-Dl-zPT"/>
                         <outlet property="scannerView" destination="zP9-QC-2eU" id="Qda-U5-uGP"/>
                     </connections>
