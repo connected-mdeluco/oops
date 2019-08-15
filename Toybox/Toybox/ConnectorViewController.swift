@@ -9,7 +9,10 @@
 import PromiseKit
 import UIKit
 
-class ConnectorTableViewController: UITableViewController {
+class ConnectorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var activityIndicator: UIActivityIndicatorView!
 
     private var sortedConnectorKeys = [String]()
     var connectors = [String:[Employee]]() {
@@ -20,6 +23,13 @@ class ConnectorTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.delegate = self
+        tableView.dataSource = self
+
+        view.bringSubviewToFront(activityIndicator)
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
 
         firstly {
             SnipeManager.getUserList()
@@ -34,6 +44,7 @@ class ConnectorTableViewController: UITableViewController {
                     d[firstLetter]?.append(employee)
                 })
                 self.tableView.reloadData()
+                self.activityIndicator.stopAnimating()
         }.catch({ error in
             self.connectors.removeAll()
         })
@@ -41,24 +52,24 @@ class ConnectorTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return connectors.keys.count
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let keyIndex = connectors.keys.index(of: sortedConnectorKeys[section])
         return connectors[keyIndex!].value.count
     }
 
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return sortedConnectorKeys
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sortedConnectorKeys[section]
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ConnectorCell", for: indexPath)
 
         let keyIndex = connectors.keys.index(of: sortedConnectorKeys[indexPath.section])
