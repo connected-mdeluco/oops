@@ -117,7 +117,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <segue destination="uhc-fZ-tuV" kind="presentation" id="4ha-cO-bYf"/>
+                                                    <segue destination="uhc-fZ-tuV" kind="presentation" identifier="SelectConnectorSegue" id="4ha-cO-bYf"/>
                                                 </connections>
                                             </button>
                                         </subviews>

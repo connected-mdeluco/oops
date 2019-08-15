@@ -21,6 +21,8 @@ class ConnectorViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
 
+    var devices = [Device]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -80,8 +82,9 @@ class ConnectorViewController: UIViewController, UITableViewDelegate, UITableVie
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let employee = employeeObject(forRowAt: indexPath)
+        let deviceList = devices.map({ $0.name }).joined(separator: "\n")
 
-        let alertController = UIAlertController(title: "\(employee.name)", message: "Confirm device selection", preferredStyle: .actionSheet)
+        let alertController = UIAlertController(title: "\(employee.name)", message: "Confirm devices:\n\(deviceList)", preferredStyle: .actionSheet)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
 
         alertController.addAction(cancelAction)
