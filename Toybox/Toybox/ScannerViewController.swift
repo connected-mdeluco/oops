@@ -169,6 +169,7 @@ extension ScannerViewController {
 }
 
 // MARK: - Devices
+
 extension ScannerViewController {
     func deviceFrom(deviceId id: String) {
         firstly {

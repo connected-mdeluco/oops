@@ -21,7 +21,7 @@ struct Device: Codable {
 
     let customFields: CustomFields?
 
-    let assignee: Assignee?
+    let assignee: Employee?
 
     struct Status: Codable {
         let statusMeta: StatusMetaTypes
@@ -49,14 +49,6 @@ struct Device: Codable {
         enum CodingKeys: String, CodingKey {
             case androidRelease = "Android Release"
             case iosRelease = "iOS Release"
-        }
-    }
-
-    struct Assignee: Codable {
-        let name: String
-
-        enum CodingKeys: String, CodingKey {
-            case name = "name"
         }
     }
 
