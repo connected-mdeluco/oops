@@ -21,7 +21,7 @@ class ConnectorViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
 
-    var devices = [Device]()
+    var employee: Employee? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,13 +81,16 @@ class ConnectorViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let employee = employeeObject(forRowAt: indexPath)
-        let deviceList = devices.map({ $0.name }).joined(separator: "\n")
+        employee = employeeObject(forRowAt: indexPath)
 
-        let alertController = UIAlertController(title: "\(employee.name)", message: "Confirm devices:\n\(deviceList)", preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let alertController = UIAlertController(title: "Choose Employee", message: "Checkout as \(employee!.name)?", preferredStyle: .alert)
+        let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+        let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { _ in
+            self.performSegue(withIdentifier: "SelectedConnectorUnwindSegue", sender: self)
+        })
 
-        alertController.addAction(cancelAction)
+        alertController.addAction(noAction)
+        alertController.addAction(yesAction)
         alertController.popoverPresentationController?.sourceView = self.view
         present(alertController, animated: true, completion: nil)
     }

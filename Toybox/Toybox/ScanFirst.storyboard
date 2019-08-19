@@ -108,7 +108,7 @@
                                                 <rect key="frame" x="183.5" y="0.0" width="175.5" height="48"/>
                                                 <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                <state key="normal" title="Confirm">
+                                                <state key="normal" title="Continue">
                                                     <color key="titleColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>
@@ -218,13 +218,14 @@
                     <navigationItem key="navigationItem" title="Select Connector" id="Ujk-R8-Txz">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="4bR-zk-XCR">
                             <connections>
-                                <segue destination="V77-iT-fJl" kind="unwind" unwindAction="cancel:" id="mXu-kP-7qk"/>
+                                <segue destination="V77-iT-fJl" kind="unwind" identifier="SelectedConnectorUnwindSegue" unwindAction="unwindToScanner:" id="3Ps-c4-kP1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="3Ch-xB-uRM" id="2b2-hY-chs"/>
                         <outlet property="tableView" destination="H0S-gm-eI9" id="eM2-Sb-ojY"/>
+                        <segue destination="V77-iT-fJl" kind="unwind" unwindAction="unwindToScanner:" id="eJm-sc-8mP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HHM-Es-DLd" userLabel="First Responder" sceneMemberID="firstResponder"/>

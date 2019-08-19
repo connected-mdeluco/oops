@@ -31,6 +31,7 @@ UITableViewDelegate {
         }
     }
     let qrScannerQueue = DispatchQueue(label: "qrScannerQueue")
+    var employee: Employee? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,15 +49,17 @@ UITableViewDelegate {
 
     // MARK: - Navigation
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SelectConnectorSegue" {
-            let navController = segue.destination as! UINavigationController
-            let destination = navController.topViewController as! ConnectorViewController
-            destination.devices = Array(devices.values)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {}
+
+    @IBAction func unwindToScanner(_ unwindSegue: UIStoryboardSegue) {
+        if unwindSegue.identifier == "SelectedConnectorUnwindSegue" {
+            let source = unwindSegue.source as! ConnectorViewController
+            employee = source.employee
+            guard employee != nil else { return }
+            // TODO confirm checkout
+            print("Selected \(employee!.name)")
         }
     }
-
-    @IBAction func cancel(_ unwindSegue: UIStoryboardSegue) {}
     
     // MARK: - AV
 
@@ -94,6 +97,7 @@ UITableViewDelegate {
 
     @IBAction func cancelAction(_ sender: Any) {
         devices.removeAll()
+        employee = nil
         deviceTableView.reloadData()
     }
 
