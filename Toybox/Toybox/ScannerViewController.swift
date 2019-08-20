@@ -10,6 +10,28 @@ import AVFoundation
 import PromiseKit
 import UIKit
 
+enum CheckoutType: Int, Comparable {
+    case checkout
+    case checkin
+    case transfer
+    case unavailable
+
+    static let typeMap: [CheckoutType: String] = [
+        .checkout: "Borrow",
+        .checkin: "Return",
+        .transfer: "Transfer",
+        .unavailable: "Unavailable"
+    ]
+
+    var string: String {
+        return CheckoutType.typeMap[self]!
+    }
+
+    static func <(lhs: CheckoutType, rhs: CheckoutType) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+}
+
 class ScannerViewController: UIViewController,
 AVCaptureMetadataOutputObjectsDelegate,
 UITableViewDataSource,
@@ -22,7 +44,7 @@ UITableViewDelegate {
     @IBOutlet var cancelButton: UIButton!
 
     var scannedCodes = [String]()
-    var devices = [String:Device]() {
+    var devices = [CheckoutType:[Device]]() {
         didSet {
             if devices.count == 0 {
                 scannedCodes.removeAll()
@@ -126,22 +148,47 @@ UITableViewDelegate {
         deviceTableView.reloadData()
     }
 
+    func checkoutType(for device: Device) -> CheckoutType {
+        let status = device.status.statusMeta
+        switch status {
+        case .deployable:
+            return .checkout
+        case .deployed:
+            return .checkin
+        default:
+            break
+        }
+        return .unavailable
+    }
 }
 
 // MARK: - TableView
 
 extension ScannerViewController {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return devices.keys.count
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return scannedCodes.count
+        let sections = devices.keys.sorted()
+        let devicesSection = sections[section]
+        return devices[devicesSection]?.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let sections = devices.keys.sorted()
+        return sections[section].string
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DeviceCell", for: indexPath)
-        let deviceId = scannedCodes[indexPath.row]
-        guard let device = devices[deviceId] else { return cell }
+
+        let sections = devices.keys.sorted()
+        let devicesSection = sections[indexPath.section]
+        // XXX: Force unwrap here, instead?
+        guard let device = devices[devicesSection]?[indexPath.row] else { return cell }
 
         cell.textLabel?.text = device.name
-        cell.detailTextLabel?.text = device.status.statusMeta == .deployable ? "Checkout" : "Return"
 
         return cell
     }
@@ -184,11 +231,17 @@ extension ScannerViewController {
 // MARK: - Devices
 
 extension ScannerViewController {
+    func add(device: Device) {
+        let deviceCheckoutType = checkoutType(for: device)
+        devices[deviceCheckoutType] = devices[deviceCheckoutType] ?? []
+        devices[deviceCheckoutType]!.append(device)
+    }
+
     func deviceFrom(deviceId id: String) {
         firstly {
             SnipeManager.getDevice(forId: id)
-            }.done { result in
-                self.devices[id] = result
+            }.done { device in
+                self.add(device: device)
                 self.deviceTableView.reloadData()
             }.catch { error in
                 self.scannedCodes.removeAll(where: { $0 == id })
