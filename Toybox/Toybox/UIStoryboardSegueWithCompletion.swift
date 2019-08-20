@@ -8,6 +8,10 @@
 
 import UIKit
 
+/*
+ * Enables view-related actions after segue has compeleted.
+ * https://stackoverflow.com/a/37602422
+ */
 class UIStoryboardSegueWithCompletion: UIStoryboardSegue {
     var completion: (() -> Void)?
 
