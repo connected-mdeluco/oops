@@ -18,6 +18,7 @@
 		F4432279214FF54600A25CA2 /* SnipeAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4432278214FF54600A25CA2 /* SnipeAPIManager.swift */; };
 		F48218F32305922400C9BC14 /* ConnectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48218F22305922400C9BC14 /* ConnectorViewController.swift */; };
 		F499B300216F93B000F59810 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = F499B2FF216F93B000F59810 /* Keys.plist */; };
+		F4AAD5EB230B3F230018E73D /* UIStoryboardSegueWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAD5EA230B3F230018E73D /* UIStoryboardSegueWithCompletion.swift */; };
 		F4BB49892152A84500F74744 /* SnipeAPIResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB49882152A84500F74744 /* SnipeAPIResponseModels.swift */; };
 		F4BB498D21552FEE00F74744 /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB498C21552FEE00F74744 /* ErrorManager.swift */; };
 		F4BB498F215D70DC00F74744 /* StringLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB498E215D70DB00F74744 /* StringLiterals.swift */; };
@@ -65,6 +66,7 @@
 		F4432278214FF54600A25CA2 /* SnipeAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnipeAPIManager.swift; sourceTree = "<group>"; };
 		F48218F22305922400C9BC14 /* ConnectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectorViewController.swift; sourceTree = "<group>"; };
 		F499B2FF216F93B000F59810 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		F4AAD5EA230B3F230018E73D /* UIStoryboardSegueWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegueWithCompletion.swift; sourceTree = "<group>"; };
 		F4BB49882152A84500F74744 /* SnipeAPIResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnipeAPIResponseModels.swift; sourceTree = "<group>"; };
 		F4BB498C21552FEE00F74744 /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorManager.swift; sourceTree = "<group>"; };
 		F4BB498E215D70DB00F74744 /* StringLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringLiterals.swift; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 				F499B2FF216F93B000F59810 /* Keys.plist */,
 				F4F09DBA1DAF669400026BB2 /* Main.storyboard */,
 				F4E7C67F2301A7D700382AE2 /* ScanFirst.storyboard */,
+				F4AAD5EA230B3F230018E73D /* UIStoryboardSegueWithCompletion.swift */,
 				F4E7C68723049A4E00382AE2 /* Button.swift */,
 				F4E7C6812301ABAB00382AE2 /* ScannerViewController.swift */,
 				F48218F22305922400C9BC14 /* ConnectorViewController.swift */,
@@ -373,6 +376,7 @@
 				F4BB498F215D70DC00F74744 /* StringLiterals.swift in Sources */,
 				F4F09DC91DAF6A3800026BB2 /* QRCodeViewController.swift in Sources */,
 				F4432279214FF54600A25CA2 /* SnipeAPIManager.swift in Sources */,
+				F4AAD5EB230B3F230018E73D /* UIStoryboardSegueWithCompletion.swift in Sources */,
 				46415C8522453BE80092751D /* DevicesViewController.swift in Sources */,
 				F4F09DB71DAF669400026BB2 /* AppDelegate.swift in Sources */,
 				F4E7C6822301ABAB00382AE2 /* ScannerViewController.swift in Sources */,

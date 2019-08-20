@@ -218,7 +218,7 @@
                     <navigationItem key="navigationItem" title="Select Connector" id="Ujk-R8-Txz">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="4bR-zk-XCR">
                             <connections>
-                                <segue destination="V77-iT-fJl" kind="unwind" identifier="SelectedConnectorUnwindSegue" unwindAction="unwindToScanner:" id="3Ps-c4-kP1"/>
+                                <segue destination="V77-iT-fJl" kind="unwind" identifier="SelectedConnectorUnwindSegue" customClass="UIStoryboardSegueWithCompletion" customModule="Toybox" customModuleProvider="target" unwindAction="unwindToScanner:" id="3Ps-c4-kP1"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

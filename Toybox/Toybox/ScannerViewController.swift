@@ -31,7 +31,6 @@ UITableViewDelegate {
         }
     }
     let qrScannerQueue = DispatchQueue(label: "qrScannerQueue")
-    var employee: Employee? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,12 +51,23 @@ UITableViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {}
 
     @IBAction func unwindToScanner(_ unwindSegue: UIStoryboardSegue) {
-        if unwindSegue.identifier == "SelectedConnectorUnwindSegue" {
-            let source = unwindSegue.source as! ConnectorViewController
-            employee = source.employee
-            guard employee != nil else { return }
-            // TODO confirm checkout
-            print("Selected \(employee!.name)")
+        guard unwindSegue.identifier == "SelectedConnectorUnwindSegue",
+            let source = unwindSegue.source as? ConnectorViewController,
+            let employee = source.employee,
+            let segue = unwindSegue as? UIStoryboardSegueWithCompletion else { return }
+
+        segue.completion = {
+            let alertController = UIAlertController(title: "Confirm Transaction", message: "Do you wish to complete transaction as \(employee.name)?", preferredStyle: .actionSheet)
+            let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { _ in
+                print("Simluated checkout as \(employee.name)")
+                self.reset()
+            })
+
+            alertController.addAction(noAction)
+            alertController.addAction(yesAction)
+            alertController.popoverPresentationController?.sourceView = self.view
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     
@@ -96,9 +106,7 @@ UITableViewDelegate {
     // MARK: - Actions
 
     @IBAction func cancelAction(_ sender: Any) {
-        devices.removeAll()
-        employee = nil
-        deviceTableView.reloadData()
+        reset()
     }
 
     // MARK: - Utility functions
@@ -111,6 +119,11 @@ UITableViewDelegate {
         let alpha = CGFloat(isEnabled ? 1.0 : 0.5)
         confirmButton.alpha = alpha
         cancelButton.alpha = alpha
+    }
+
+    func reset() {
+        devices.removeAll()
+        deviceTableView.reloadData()
     }
 
 }
