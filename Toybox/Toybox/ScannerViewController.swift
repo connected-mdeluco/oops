@@ -42,6 +42,7 @@ UITableViewDelegate {
     @IBOutlet var deviceTableView: UITableView!
     @IBOutlet var confirmButton: UIButton!
     @IBOutlet var cancelButton: UIButton!
+    @IBOutlet var checkoutActivityIndicator: UIActivityIndicatorView!
 
     var scannedCodes = [String]()
     var devices = [CheckoutType:[Device]]() {
@@ -82,8 +83,7 @@ UITableViewDelegate {
             let alertController = UIAlertController(title: "Confirm Transaction", message: "Do you wish to complete transaction as \(employee.name)?", preferredStyle: .actionSheet)
             let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
             let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { _ in
-                print("Simluated checkout as \(employee.name)")
-                self.reset()
+                self.checkout(as: employee, onComplete: {})
             })
 
             alertController.addAction(noAction)
@@ -246,5 +246,30 @@ extension ScannerViewController {
             }.catch { error in
                 self.scannedCodes.removeAll(where: { $0 == id })
             }
+    }
+
+    func checkout(as employee: Employee, onComplete: @escaping () -> Void) {
+        view.bringSubviewToFront(checkoutActivityIndicator)
+        checkoutActivityIndicator.isHidden = false
+        checkoutActivityIndicator.startAnimating()
+
+        let checkoutPromises = devices[.checkout]?.map { device in
+            SnipeManager.borrowDevice(withId: "\(device.identifier)", toEmployee: "\(employee.id)")
+        } ?? []
+
+        let checkinPromises = devices[.checkin]?.map { device in
+            SnipeManager.returnDevice(device: device)
+        } ?? []
+
+        let allPromises = checkoutPromises + checkinPromises
+
+        when(resolved: allPromises).done { results in
+            // TODO: Display some kind of confirmation to user
+            let countFulfilled = results.filter { $0.isFulfilled }.count
+            print("\(countFulfilled) successful requests")
+            onComplete()
+            self.checkoutActivityIndicator.stopAnimating()
+            self.reset()
+        }
     }
 }
