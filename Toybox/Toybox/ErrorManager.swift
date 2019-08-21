@@ -31,16 +31,7 @@ class ErrorManager: UIViewController {
         case .invalidApiCall:
             presentErrorAlert(onView: instance, message: invalidApiCallAlertMessage)
         case .deviceAlreadyBorrowed:
-            // Transfer ownership from previous user to current user
-            if let device = device, instance is QRScannerController {
-                (instance as! QRScannerController).tryDeviceReturn(device, completion: { (success) in
-                    if success {
-                        (instance as! QRScannerController).tryDeviceBorrow("\(device.identifier)", completion: nil)
-                    } else {
-                        // TODO: error -- could not transfer ownership
-                    }
-                })
-            }
+            break
         case .deviceAlreadyReturned:
             print("device already returned")
         }
