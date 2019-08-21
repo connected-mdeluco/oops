@@ -102,6 +102,7 @@ UITableViewDelegate {
         guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
             let input = try? AVCaptureDeviceInput(device: captureDevice)
             else {
+                // TODO handle error
                 print("Failed to get the camera device")
                 return
             }
@@ -249,7 +250,13 @@ extension ScannerViewController {
         guard let deviceId = parseDeviceId(fromQRCode: code),
             !scannedCodes.contains(deviceId) else { return }
 
-        print("New device Scanned: \(deviceId)")
+        DispatchQueue.main.async(qos: .userInteractive) {
+            UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: {
+                self.cameraView.alpha = 0.25
+                self.cameraView.alpha = 1.0
+            }, completion: nil)
+        }
+
         scannedCodes.append(deviceId)
         self.deviceFrom(deviceId: deviceId)
     }
@@ -286,8 +293,6 @@ extension ScannerViewController {
         when(resolved: allPromises).done { results in
             // TODO: Display some kind of confirmation to user
             let countFulfilled = results.filter { $0.isFulfilled }.count
-            print("\(countFulfilled) successful requests")
-            print("\(results.count - countFulfilled) erroneous requests")
 
             if let onComplete = onComplete {
                 onComplete()
