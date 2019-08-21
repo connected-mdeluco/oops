@@ -248,14 +248,17 @@ extension ScannerViewController {
             }
     }
 
-    func checkout(as employee: Employee, onComplete: @escaping () -> Void) {
+    func checkout(as employee: Employee? = nil, onComplete: (() -> ())? = nil) {
         view.bringSubviewToFront(checkoutActivityIndicator)
         checkoutActivityIndicator.isHidden = false
         checkoutActivityIndicator.startAnimating()
 
-        let checkoutPromises = devices[.checkout]?.map { device in
-            SnipeManager.borrowDevice(withId: "\(device.identifier)", toEmployee: "\(employee.id)")
-        } ?? []
+        var checkoutPromises = [Promise<String>]()
+        if let employee = employee {
+            checkoutPromises.append(contentsOf: devices[.checkout]?.map { device in
+                SnipeManager.borrowDevice(withId: "\(device.identifier)", toEmployee: "\(employee.id)")
+            } ?? [])
+        }
 
         let checkinPromises = devices[.checkin]?.map { device in
             SnipeManager.returnDevice(device: device)
@@ -267,7 +270,12 @@ extension ScannerViewController {
             // TODO: Display some kind of confirmation to user
             let countFulfilled = results.filter { $0.isFulfilled }.count
             print("\(countFulfilled) successful requests")
-            onComplete()
+            print("\(results.count - countFulfilled) erroneous requests")
+
+            if let onComplete = onComplete {
+                onComplete()
+            }
+
             self.checkoutActivityIndicator.stopAnimating()
             self.reset()
         }
