@@ -10,28 +10,6 @@ import AVFoundation
 import PromiseKit
 import UIKit
 
-enum CheckoutType: Int, Comparable {
-    case checkout
-    case checkin
-    case transfer
-    case unavailable
-
-    static let typeMap: [CheckoutType: String] = [
-        .checkout: "Borrow",
-        .checkin: "Return",
-        .transfer: "Transfer",
-        .unavailable: "Unavailable"
-    ]
-
-    var string: String {
-        return CheckoutType.typeMap[self]!
-    }
-
-    static func <(lhs: CheckoutType, rhs: CheckoutType) -> Bool {
-        return lhs.rawValue < rhs.rawValue
-    }
-}
-
 class ScannerViewController: UIViewController,
 AVCaptureMetadataOutputObjectsDelegate,
 UITableViewDataSource,
@@ -292,8 +270,6 @@ extension ScannerViewController {
 
         when(resolved: allPromises).done { results in
             // TODO: Display some kind of confirmation to user
-            let countFulfilled = results.filter { $0.isFulfilled }.count
-
             if let onComplete = onComplete {
                 onComplete()
             }

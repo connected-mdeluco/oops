@@ -17,6 +17,7 @@
 		F4AAD5EB230B3F230018E73D /* UIStoryboardSegueWithCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAD5EA230B3F230018E73D /* UIStoryboardSegueWithCompletion.swift */; };
 		F4AAD5EE230DD89D0018E73D /* StringLiterals.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAD5ED230DD89D0018E73D /* StringLiterals.swift */; };
 		F4AAD5EF230DD89D0018E73D /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAD5EC230DD89D0018E73D /* ErrorManager.swift */; };
+		F4AAD5F1230DDAFC0018E73D /* CheckoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAD5F0230DDAFC0018E73D /* CheckoutType.swift */; };
 		F4BB49892152A84500F74744 /* SnipeAPIResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB49882152A84500F74744 /* SnipeAPIResponseModels.swift */; };
 		F4E7C6802301A7D700382AE2 /* ScanFirst.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4E7C67F2301A7D700382AE2 /* ScanFirst.storyboard */; };
 		F4E7C6822301ABAB00382AE2 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E7C6812301ABAB00382AE2 /* ScannerViewController.swift */; };
@@ -58,6 +59,7 @@
 		F4AAD5EA230B3F230018E73D /* UIStoryboardSegueWithCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegueWithCompletion.swift; sourceTree = "<group>"; };
 		F4AAD5EC230DD89D0018E73D /* ErrorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ErrorManager.swift; path = "/Users/cl-dev/Development/toybox-ios/Toybox/Toybox/ErrorManager.swift"; sourceTree = "<absolute>"; };
 		F4AAD5ED230DD89D0018E73D /* StringLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringLiterals.swift; path = "/Users/cl-dev/Development/toybox-ios/Toybox/Toybox/StringLiterals.swift"; sourceTree = "<absolute>"; };
+		F4AAD5F0230DDAFC0018E73D /* CheckoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutType.swift; sourceTree = "<group>"; };
 		F4BB49882152A84500F74744 /* SnipeAPIResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnipeAPIResponseModels.swift; sourceTree = "<group>"; };
 		F4E7C67F2301A7D700382AE2 /* ScanFirst.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScanFirst.storyboard; sourceTree = "<group>"; };
 		F4E7C6812301ABAB00382AE2 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				F4E7C67F2301A7D700382AE2 /* ScanFirst.storyboard */,
 				F4E7C6812301ABAB00382AE2 /* ScannerViewController.swift */,
 				F48218F22305922400C9BC14 /* ConnectorViewController.swift */,
+				F4AAD5F0230DDAFC0018E73D /* CheckoutType.swift */,
 				F4E7C68723049A4E00382AE2 /* Button.swift */,
 				F4AAD5EA230B3F230018E73D /* UIStoryboardSegueWithCompletion.swift */,
 				F4432278214FF54600A25CA2 /* SnipeAPIManager.swift */,
@@ -348,6 +351,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4AAD5EF230DD89D0018E73D /* ErrorManager.swift in Sources */,
+				F4AAD5F1230DDAFC0018E73D /* CheckoutType.swift in Sources */,
 				F4BB49892152A84500F74744 /* SnipeAPIResponseModels.swift in Sources */,
 				F4432279214FF54600A25CA2 /* SnipeAPIManager.swift in Sources */,
 				F4AAD5EB230B3F230018E73D /* UIStoryboardSegueWithCompletion.swift in Sources */,
