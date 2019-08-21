@@ -45,14 +45,16 @@ UITableViewDelegate {
     @IBOutlet var checkoutActivityIndicator: UIActivityIndicatorView!
 
     var scannedCodes = [String]()
-    var devices = [CheckoutType:[Device]]() {
+    var devices = [Device]() {
         didSet {
             if devices.count == 0 {
                 scannedCodes.removeAll()
             }
+            deviceTableView.reloadData()
             updateButtons()
         }
     }
+
     let qrScannerQueue = DispatchQueue(label: "qrScannerQueue")
     
     override func viewDidLoad() {
@@ -145,7 +147,6 @@ UITableViewDelegate {
 
     func reset() {
         devices.removeAll()
-        deviceTableView.reloadData()
     }
 
     func checkoutType(for device: Device) -> CheckoutType {
@@ -165,30 +166,35 @@ UITableViewDelegate {
 // MARK: - TableView
 
 extension ScannerViewController {
+    func sections() -> Set<CheckoutType> {
+        return devices.reduce(into: Set<CheckoutType>()) { statusSet, device in
+            statusSet.insert(checkoutType(for: device))
+        }
+    }
+
+    func devicesInSection(section: Int) -> [Device] {
+        let sortedSections = Array(sections()).sorted()
+        return devices.filter{ checkoutType(for: $0) == sortedSections[section] }
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
-        return devices.keys.count
+        return sections().count
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sections = devices.keys.sorted()
-        let devicesSection = sections[section]
-        return devices[devicesSection]?.count ?? 0
+        return devicesInSection(section: section).count
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        let sections = devices.keys.sorted()
-        return sections[section].string
+        let sortedSections = Array(sections()).sorted()
+        return sortedSections[section].string
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DeviceCell", for: indexPath)
 
-        let sections = devices.keys.sorted()
-        let devicesSection = sections[indexPath.section]
-        // XXX: Force unwrap here, instead?
-        guard let device = devices[devicesSection]?[indexPath.row] else { return cell }
-
-        cell.textLabel?.text = device.name
+        let devicesSubset = devicesInSection(section: indexPath.section)
+        cell.textLabel?.text = devicesSubset[indexPath.row].name
 
         return cell
     }
@@ -231,18 +237,11 @@ extension ScannerViewController {
 // MARK: - Devices
 
 extension ScannerViewController {
-    func add(device: Device) {
-        let deviceCheckoutType = checkoutType(for: device)
-        devices[deviceCheckoutType] = devices[deviceCheckoutType] ?? []
-        devices[deviceCheckoutType]!.append(device)
-    }
-
     func deviceFrom(deviceId id: String) {
         firstly {
             SnipeManager.getDevice(forId: id)
             }.done { device in
-                self.add(device: device)
-                self.deviceTableView.reloadData()
+                self.devices.append(device)
             }.catch { error in
                 self.scannedCodes.removeAll(where: { $0 == id })
             }
@@ -253,18 +252,15 @@ extension ScannerViewController {
         checkoutActivityIndicator.isHidden = false
         checkoutActivityIndicator.startAnimating()
 
-        var checkoutPromises = [Promise<String>]()
+        var allPromises = [Promise<String>]()
         if let employee = employee {
-            checkoutPromises.append(contentsOf: devices[.checkout]?.map { device in
-                SnipeManager.borrowDevice(withId: "\(device.identifier)", toEmployee: "\(employee.id)")
-            } ?? [])
+            allPromises.append(contentsOf: devices.filter { checkoutType(for: $0) == .checkout }.map {
+                SnipeManager.borrowDevice(withId: "\($0.identifier)", toEmployee: "\(employee.id)")
+            })
         }
-
-        let checkinPromises = devices[.checkin]?.map { device in
-            SnipeManager.returnDevice(device: device)
-        } ?? []
-
-        let allPromises = checkoutPromises + checkinPromises
+        allPromises.append(contentsOf: devices.filter { checkoutType(for: $0) == .checkin }.map {
+            SnipeManager.returnDevice(device: $0)
+        })
 
         when(resolved: allPromises).done { results in
             // TODO: Display some kind of confirmation to user
