@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="j0c-uR-gfQ">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="NCP-oz-6Z9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Lui-5G-f73">
-                                <rect key="frame" x="0.0" y="205.5" width="375" height="461.5"/>
+                                <rect key="frame" x="0.0" y="197.5" width="375" height="420.5"/>
                                 <color key="backgroundColor" name="underPageBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="ⓣⓞⓨ ⓑⓞⓧ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="koY-Jl-f7v">
@@ -48,7 +48,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sSP-4y-Kc5" userLabel="Main View">
-                                <rect key="frame" x="0.0" y="205.5" width="375" height="461.5"/>
+                                <rect key="frame" x="0.0" y="205.5" width="375" height="412.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Devices" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OaK-kL-GgR">
                                         <rect key="frame" x="156" y="0.0" width="63.5" height="20.5"/>
@@ -57,7 +57,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U5T-nd-W40">
-                                        <rect key="frame" x="8" y="28.5" width="359" height="369"/>
+                                        <rect key="frame" x="8" y="28.5" width="359" height="320"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DeviceCell" textLabel="opB-bI-URs" style="IBUITableViewCellStyleDefault" id="HUp-J9-qAa">
@@ -80,7 +80,7 @@
                                         </prototypes>
                                     </tableView>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="TFG-as-787">
-                                        <rect key="frame" x="8" y="405.5" width="359" height="48"/>
+                                        <rect key="frame" x="8" y="356.5" width="359" height="48"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r4F-Bx-pIV">
                                                 <rect key="frame" x="0.0" y="0.0" width="175.5" height="48"/>
@@ -144,20 +144,21 @@
                             <constraint firstItem="Lui-5G-f73" firstAttribute="centerX" secondItem="YNk-ta-hZ6" secondAttribute="centerX" id="2bX-aw-qrm"/>
                             <constraint firstItem="sSP-4y-Kc5" firstAttribute="centerX" secondItem="YNk-ta-hZ6" secondAttribute="centerX" id="6aT-NL-yYh"/>
                             <constraint firstItem="NON-C7-ya9" firstAttribute="height" secondItem="YNk-ta-hZ6" secondAttribute="height" multiplier="0.2" id="CoH-E9-O4b"/>
-                            <constraint firstItem="Lui-5G-f73" firstAttribute="height" secondItem="sSP-4y-Kc5" secondAttribute="height" id="HdX-uI-aj3"/>
                             <constraint firstItem="sSP-4y-Kc5" firstAttribute="width" secondItem="YNk-ta-hZ6" secondAttribute="width" id="HhT-Qx-yol"/>
                             <constraint firstItem="sSP-4y-Kc5" firstAttribute="top" secondItem="NON-C7-ya9" secondAttribute="bottom" constant="8" id="Ou8-pL-nzp"/>
                             <constraint firstItem="koY-Jl-f7v" firstAttribute="top" secondItem="9Ja-73-6pP" secondAttribute="top" id="VKD-L4-nPl"/>
                             <constraint firstItem="Lui-5G-f73" firstAttribute="width" secondItem="sSP-4y-Kc5" secondAttribute="width" id="Vir-pd-q2S"/>
                             <constraint firstItem="9Ja-73-6pP" firstAttribute="bottom" secondItem="Lui-5G-f73" secondAttribute="bottom" id="W4i-SW-ju4"/>
                             <constraint firstItem="koY-Jl-f7v" firstAttribute="centerX" secondItem="YNk-ta-hZ6" secondAttribute="centerX" id="bdk-ta-lwW"/>
+                            <constraint firstItem="Lui-5G-f73" firstAttribute="top" secondItem="NON-C7-ya9" secondAttribute="bottom" id="cYo-bW-CT3"/>
                             <constraint firstItem="NON-C7-ya9" firstAttribute="width" secondItem="YNk-ta-hZ6" secondAttribute="width" id="hb1-e1-9pe"/>
-                            <constraint firstAttribute="bottom" secondItem="sSP-4y-Kc5" secondAttribute="bottom" id="moR-bs-gWa"/>
+                            <constraint firstItem="sSP-4y-Kc5" firstAttribute="bottom" secondItem="9Ja-73-6pP" secondAttribute="bottom" id="moR-bs-gWa"/>
                             <constraint firstItem="NON-C7-ya9" firstAttribute="centerX" secondItem="9Ja-73-6pP" secondAttribute="centerX" id="nNT-UW-4q5"/>
                             <constraint firstItem="NON-C7-ya9" firstAttribute="top" secondItem="koY-Jl-f7v" secondAttribute="bottom" constant="8" id="pr7-I3-tDL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9Ja-73-6pP"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Scan" id="lp0-BH-TRa"/>
                     <connections>
                         <outlet property="cameraView" destination="NON-C7-ya9" id="dMW-3I-37S"/>
                         <outlet property="cancelButton" destination="r4F-Bx-pIV" id="g3V-J5-dWs"/>
@@ -165,13 +166,14 @@
                         <outlet property="confirmButton" destination="fKx-up-kN7" id="BT7-J2-Qht"/>
                         <outlet property="continueButton" destination="fKx-up-kN7" id="dAA-EE-ESg"/>
                         <outlet property="deviceTableView" destination="U5T-nd-W40" id="JGz-Dl-zPT"/>
+                        <outlet property="scanTabBarItem" destination="lp0-BH-TRa" id="1rl-zJ-a9w"/>
                         <outlet property="scannerView" destination="zP9-QC-2eU" id="Qda-U5-uGP"/>
                         <segue destination="uhc-fZ-tuV" kind="presentation" identifier="SelectConnectorSegue" id="Kxe-ZU-0yf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V5M-3H-zXS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-162.40000000000001" y="143.47826086956522"/>
+            <point key="canvasLocation" x="776.79999999999995" y="143.47826086956522"/>
         </scene>
         <!--Select Connector-->
         <scene sceneID="goY-VO-Fnt">
@@ -235,7 +237,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HHM-Es-DLd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="V77-iT-fJl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1527" y="143"/>
+            <point key="canvasLocation" x="2464.8000000000002" y="142.57871064467767"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4oy-MS-vol">
@@ -253,7 +255,24 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m4N-Gb-8aV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="658" y="143"/>
+            <point key="canvasLocation" x="1596" y="142.57871064467767"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="jBt-FV-QzT">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="NCP-oz-6Z9" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HG2-PI-KqS">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="j0c-uR-gfQ" kind="relationship" relationship="viewControllers" id="8PR-Bx-Y5I"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f8r-8f-Gye" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-162.40000000000001" y="143.47826086956522"/>
         </scene>
     </scenes>
 </document>

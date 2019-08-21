@@ -22,6 +22,7 @@ UITableViewDelegate {
     @IBOutlet var cancelButton: UIButton!
     @IBOutlet var continueButton: UIButton!
     @IBOutlet var checkoutActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet var scanTabBarItem: UITabBarItem!
 
     var scannedCodes = [String]()
     var devices = [Device]() {
@@ -47,8 +48,19 @@ UITableViewDelegate {
         scannerView.layer.borderColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
         scannerView.layer.borderWidth = 2
         cameraView.bringSubviewToFront(scannerView)
+
+        if let qrCodeImage = createQRCodeImage(from: "https://connected.io") {
+            scanTabBarItem.image = UIImage(ciImage: qrCodeImage).withRenderingMode(.alwaysOriginal)
+            scanTabBarItem.selectedImage = UIImage(ciImage: qrCodeImage).withRenderingMode(.alwaysOriginal)
+        }
     }
-    
+
+    func createQRCodeImage(from string: String) -> CIImage? {
+        let data = string.data(using: String.Encoding.ascii)
+        guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else { return nil }
+        qrFilter.setValue(data, forKey: "inputMessage")
+        return qrFilter.outputImage
+    }
 
     // MARK: - Navigation
 
