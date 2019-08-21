@@ -42,6 +42,7 @@ UITableViewDelegate {
     @IBOutlet var deviceTableView: UITableView!
     @IBOutlet var confirmButton: UIButton!
     @IBOutlet var cancelButton: UIButton!
+    @IBOutlet var continueButton: UIButton!
     @IBOutlet var checkoutActivityIndicator: UIActivityIndicatorView!
 
     var scannedCodes = [String]()
@@ -133,7 +134,19 @@ UITableViewDelegate {
         reset()
     }
 
+    @IBAction func continueAction(_ sender: Any) {
+        if devicesByCheckout(.checkout).count > 0 {
+            self.performSegue(withIdentifier: "SelectConnectorSegue", sender: self)
+        } else if devicesByCheckout(.checkin).count > 0 {
+            self.checkout()
+        }
+    }
+
     // MARK: - Utility functions
+
+    func devicesByCheckout(_ type: CheckoutType) -> [Device] {
+        return devices.filter { checkoutType(for: $0) == type }
+    }
 
     func updateButtons() {
         let isEnabled = devices.count > 0 ? true : false
@@ -143,6 +156,14 @@ UITableViewDelegate {
         let alpha = CGFloat(isEnabled ? 1.0 : 0.5)
         confirmButton.alpha = alpha
         cancelButton.alpha = alpha
+
+        if devicesByCheckout(.checkin).count > 0
+            && devicesByCheckout(.checkout).count == 0 {
+            continueButton.setTitle("Return", for: .normal)
+        } else {
+            continueButton.setTitle("Continue", for: .normal)
+        }
+
     }
 
     func reset() {

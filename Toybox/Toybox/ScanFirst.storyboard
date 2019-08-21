@@ -117,7 +117,7 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <segue destination="uhc-fZ-tuV" kind="presentation" identifier="SelectConnectorSegue" id="4ha-cO-bYf"/>
+                                                    <action selector="continueAction:" destination="j0c-uR-gfQ" eventType="touchUpInside" id="2e8-vm-Tqy"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -163,8 +163,10 @@
                         <outlet property="cancelButton" destination="r4F-Bx-pIV" id="g3V-J5-dWs"/>
                         <outlet property="checkoutActivityIndicator" destination="Lui-5G-f73" id="PWS-Y0-vzk"/>
                         <outlet property="confirmButton" destination="fKx-up-kN7" id="BT7-J2-Qht"/>
+                        <outlet property="continueButton" destination="fKx-up-kN7" id="dAA-EE-ESg"/>
                         <outlet property="deviceTableView" destination="U5T-nd-W40" id="JGz-Dl-zPT"/>
                         <outlet property="scannerView" destination="zP9-QC-2eU" id="Qda-U5-uGP"/>
+                        <segue destination="uhc-fZ-tuV" kind="presentation" identifier="SelectConnectorSegue" id="Kxe-ZU-0yf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V5M-3H-zXS" userLabel="First Responder" sceneMemberID="firstResponder"/>
