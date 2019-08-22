@@ -178,7 +178,7 @@
         <!--Devices-->
         <scene sceneID="oTS-LV-pdo">
             <objects>
-                <tableViewController id="aoh-pH-bys" sceneMemberID="viewController">
+                <tableViewController id="aoh-pH-bys" customClass="DevicesTableViewController" customModule="Toybox" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="1mJ-7X-xnR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
