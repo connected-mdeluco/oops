@@ -39,7 +39,9 @@ UITableViewDelegate {
     let videoCaptureSession: AVCaptureSession = AVCaptureSession()
     let captureMetadataOutput = AVCaptureMetadataOutput()
     var videoPreviewLayer: AVCaptureVideoPreviewLayer? = nil
-    
+
+    // MARK: - View Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         deviceTableView.delegate = self
@@ -85,9 +87,7 @@ UITableViewDelegate {
     }
 
     // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {}
-
+    
     @IBAction func unwindToScanner(_ unwindSegue: UIStoryboardSegue) {
         guard unwindSegue.identifier == "SelectedConnectorUnwindSegue",
             let source = unwindSegue.source as? ConnectorViewController,
