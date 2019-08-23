@@ -73,16 +73,7 @@ UITableViewDelegate {
             let segue = unwindSegue as? UIStoryboardSegueWithCompletion else { return }
 
         segue.completion = {
-            let alertController = UIAlertController(title: "Confirm Transaction", message: "Do you wish to complete transaction as \(employee.name)?", preferredStyle: .actionSheet)
-            let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
-            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: { _ in
-                self.checkout(as: employee, onComplete: {})
-            })
-
-            alertController.addAction(noAction)
-            alertController.addAction(yesAction)
-            alertController.popoverPresentationController?.sourceView = self.view
-            self.present(alertController, animated: true, completion: nil)
+            self.checkout(as: employee, onComplete: {})
         }
     }
     
