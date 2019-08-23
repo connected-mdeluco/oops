@@ -36,6 +36,9 @@ UITableViewDelegate {
     }
 
     let qrScannerQueue = DispatchQueue(label: "qrScannerQueue")
+    let videoCaptureSession: AVCaptureSession = AVCaptureSession()
+    let captureMetadataOutput = AVCaptureMetadataOutput()
+    var videoPreviewLayer: AVCaptureVideoPreviewLayer? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,14 +47,33 @@ UITableViewDelegate {
 
         updateButtons()
         setUpVideoCaptureSession()
-
         scannerView.layer.borderColor = #colorLiteral(red: 0, green: 0.9768045545, blue: 0, alpha: 1)
         scannerView.layer.borderWidth = 2
-        cameraView.bringSubviewToFront(scannerView)
+
 
         if let qrCodeImage = createQRCodeImage(from: "https://connected.io") {
             scanTabBarItem.image = UIImage(ciImage: qrCodeImage).withRenderingMode(.alwaysOriginal)
             scanTabBarItem.selectedImage = UIImage(ciImage: qrCodeImage).withRenderingMode(.alwaysOriginal)
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        videoCaptureSession.startRunning()
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        videoCaptureSession.stopRunning()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        cameraView.bringSubviewToFront(scannerView)
+        if let videoPreviewLayer = videoPreviewLayer {
+            videoPreviewLayer.videoGravity = .resizeAspectFill
+            videoPreviewLayer.frame.size = cameraView.frame.size
+            captureMetadataOutput.rectOfInterest = videoPreviewLayer.metadataOutputRectConverted(fromLayerRect: scannerView.frame)
         }
     }
 
@@ -80,6 +102,11 @@ UITableViewDelegate {
     // MARK: - AV
 
     func setUpVideoCaptureSession() {
+        if videoCaptureSession.inputs.count > 0
+            && videoCaptureSession.outputs.count > 0 {
+                return
+        }
+
         guard let captureDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front),
             let input = try? AVCaptureDeviceInput(device: captureDevice)
             else {
@@ -87,10 +114,8 @@ UITableViewDelegate {
                 print("Failed to get the camera device")
                 return
             }
-        
-        let videoCaptureSession = AVCaptureSession()
-        let captureMetadataOutput = AVCaptureMetadataOutput()
-        let videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoCaptureSession)
+
+        videoPreviewLayer = AVCaptureVideoPreviewLayer(session: videoCaptureSession)
 
         videoCaptureSession.beginConfiguration()
         videoCaptureSession.addInput(input)
@@ -100,14 +125,7 @@ UITableViewDelegate {
         captureMetadataOutput.setMetadataObjectsDelegate(self, queue: qrScannerQueue)
         captureMetadataOutput.metadataObjectTypes = [AVMetadataObject.ObjectType.qr]
 
-        videoPreviewLayer.videoGravity = .resizeAspectFill
-        videoPreviewLayer.frame = cameraView.bounds
-        cameraView.layer.addSublayer(videoPreviewLayer)
-
-        videoCaptureSession.startRunning()
-        
-        // For reasons unknown, in order to work as expected this must appear after startRunning().
-        captureMetadataOutput.rectOfInterest = videoPreviewLayer.metadataOutputRectConverted(fromLayerRect: scannerView.frame)
+        cameraView.layer.addSublayer(videoPreviewLayer!)
     }
 
     // MARK: - Actions
