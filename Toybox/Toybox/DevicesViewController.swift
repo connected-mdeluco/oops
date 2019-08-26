@@ -5,6 +5,7 @@
 //  Created by cl-dev on 2019-08-23.
 //
 
+import PromiseKit
 import UIKit
 
 class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -35,13 +36,16 @@ class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewD
         3: [17, 8, 2]
     ]
 
+    var devices = [[Device]]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         devicesTableView.delegate = self
         devicesTableView.dataSource = self
 
-        // Do any additional setup after loading the view.
+        let selectedSegmentIndex = devicesSegmentedControl.selectedSegmentIndex
+        loadDevices(for: selectedSegmentIndex)
     }
     
 
@@ -56,19 +60,9 @@ class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewD
     */
 
     @IBAction func devicesSegmentedControlChangedAction(_ sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 0:
-            break
-        case 1:
-            break
-        case 2:
-            break
-        case 3:
-            break
-        default:
-            break
-        }
+        devices.removeAll()
         devicesTableView.reloadData()
+        loadDevices(for: sender.selectedSegmentIndex)
     }
 }
 
@@ -87,11 +81,41 @@ extension DevicesViewController {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        guard section < devices.count else { return 1 }
+        return devices[section].count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DeviceCell", for: indexPath)
+        cell.textLabel?.text = ""
+        cell.detailTextLabel?.text = ""
+
+        guard indexPath.section < devices.count else { return cell }
+        let devicesForSection = devices[indexPath.section]
+        let status = devicesForSection[indexPath.row].status.statusMeta
+        cell.textLabel?.text = devicesForSection[indexPath.row].name
+        cell.detailTextLabel?.text = status != .deployable ? "Unavailable" : "Available"
+
         return cell
+    }
+}
+
+// MARK: - Devices
+
+extension DevicesViewController {
+    func loadDevices(for segment: Int) {
+        guard let allPromises = segments[segment]?.map({ SnipeManager.getDevices(categoryId: $0) }) else { return }
+
+        when(resolved: allPromises).done { results in
+            for result in results {
+                switch result {
+                case .fulfilled(let deviceResults):
+                    self.devices.append(deviceResults)
+                case .rejected(_):
+                    break
+                }
+            }
+            self.devicesTableView.reloadData()
+        }
     }
 }

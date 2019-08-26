@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/cl-dev/Development/toybox-ios/Toybox/Toybox/DevicesViewController.swift">
-   </FileRef>
-   <FileRef
       location = "group:Toybox.xcodeproj">
    </FileRef>
    <FileRef

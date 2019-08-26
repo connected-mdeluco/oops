@@ -268,7 +268,7 @@ class SnipeManager {
 
     // MARK: -Devices
 
-    static func getDevices() -> Promise<[Device]> {
+    static func getDevices(limit: Int = 500, categoryId: Int?) -> Promise<[Device]> {
 
         guard let unwrappedUrl = URL(string: apiUrl + CallType.hardware.rawValue.dropLast())
             else { return Promise<[Device]> { seal in
@@ -278,7 +278,10 @@ class SnipeManager {
 
         let theKey = getAPIKey(keyname: apiKeyName)
 
-        let parameters = ["limit": "500", "order": "asc"]
+        var parameters = ["limit": "\(limit)", "sort": "name", "order": "asc"]
+        if let categoryId = categoryId {
+            parameters["category_id"] = "\(categoryId)"
+        }
 
         return Promise { seal in
             Alamofire
