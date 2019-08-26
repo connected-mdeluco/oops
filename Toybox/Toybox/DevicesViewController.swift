@@ -11,26 +11,28 @@ class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet var devicesSegmentedControl: UISegmentedControl!
     @IBOutlet var devicesTableView: UITableView!
 
-    let categories: [String:String] = [
-        "AAI": "Android IoT",
-        "ADP": "Android",
-        "ADT": "Android",
-        "ASD": "Streaming Devices",
-        "IDM": "Music Players",
-        "IDP": "Apple",
-        "IDT": "Apple",
-        "MMA": "Machines",
-        "XAI": "Other IoT",
-        "XCA": "Cameras",
-        "XHS": "Headsets",
-        "XSP": "Speakers"
+    // Category ID: Name
+    let categories: [Int:String] = [
+        17: "IoT (Android)", // "AAI"
+        3: "Android", // "ADP"
+        6: "Android", // "ADT"
+        33: "Streaming Devices", // "ASD"
+        10: "Music Players", // "IDM"
+        4: "Apple", // "IDP"
+        7: "Apple", // "IDT"
+        2: "Machines", // "MMA"
+        8: "IoT (Other)", // "XAI"
+        34: "Cameras", // "XCA"
+        16: "Headsets", // "XHS"
+        12: "Speakers" // "XSP"
     ]
 
-    let segments: [Int: [String]] = [
-        0: ["IDP", "ADP"],
-        1: ["IDT", "ADT"],
-        2: ["XSP", "ASD", "XHS", "IDM", "XCA"],
-        3: ["MMA", "AAI", "XAI"]
+    // Segment: List of Category IDs
+    let segments: [Int: [Int]] = [
+        0: [3, 4],
+        1: [6, 7],
+        2: [34, 16, 10, 12, 33],
+        3: [17, 8, 2]
     ]
 
     override func viewDidLoad() {
