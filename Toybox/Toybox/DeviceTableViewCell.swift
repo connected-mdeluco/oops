@@ -14,27 +14,19 @@ class DeviceTableViewCell: UITableViewCell {
     @IBOutlet var deviceNameLabel: UILabel!
     @IBOutlet var expectedLabel: UILabel!
 
-    var expectedLabelText: String = "" {
+    var expectedAttributedString: NSAttributedString = NSAttributedString() {
         didSet {
-            expectedLabel.text = expectedLabelText
-            if expectedLabelText.count == 0 {
+            expectedLabel.attributedText = expectedAttributedString
+            if expectedAttributedString.length == 0 {
                 verticalStackView.removeArrangedSubview(expectedLabel)
+                expectedLabel.removeFromSuperview()
             } else if !verticalStackView.arrangedSubviews.contains(expectedLabel) {
                 verticalStackView.addArrangedSubview(expectedLabel)
             }
         }
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
+    let overdueString = NSAttributedString(string: " OVERDUE", attributes: [NSAttributedString.Key.foregroundColor: UIColor.red])
 
     func clear() {
         statusLabel.text = ""
@@ -50,9 +42,13 @@ class DeviceTableViewCell: UITableViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "E, MMM dd"
         if let expectedCheckin = device.expectedCheckin {
-            expectedLabelText = "Expected \(dateFormatter.string(from: expectedCheckin))"
+            let attStr = NSMutableAttributedString(string: "Expected \(dateFormatter.string(from: expectedCheckin))")
+            if expectedCheckin.timeIntervalSinceNow.sign == .minus {
+                attStr.append(overdueString)
+            }
+            expectedAttributedString = NSAttributedString(attributedString: attStr)
         } else {
-            expectedLabelText = ""
+            expectedAttributedString = NSAttributedString()
         }
     }
 
