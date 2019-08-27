@@ -11,6 +11,7 @@ import UIKit
 class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet var devicesSegmentedControl: UISegmentedControl!
     @IBOutlet var devicesTableView: UITableView!
+    @IBOutlet var devicesLoadingActvityIndicator: UIActivityIndicatorView!
 
     // Category IDs mapped to Category Names
     let categories: [Int:String] = [
@@ -44,6 +45,7 @@ class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewD
         devicesTableView.delegate = self
         devicesTableView.dataSource = self
 
+        self.view.bringSubviewToFront(devicesLoadingActvityIndicator)
         let selectedSegmentIndex = devicesSegmentedControl.selectedSegmentIndex
         loadDevices(for: selectedSegmentIndex)
     }
@@ -103,6 +105,9 @@ extension DevicesViewController {
 
 extension DevicesViewController {
     func loadDevices(for segment: Int) {
+        devicesLoadingActvityIndicator.startAnimating()
+        devicesLoadingActvityIndicator.isHidden = false
+
         guard let allPromises = segments[segment]?.map({ SnipeManager.getDevices(categoryId: $0) }) else { return }
 
         when(resolved: allPromises).done { results in
@@ -115,6 +120,7 @@ extension DevicesViewController {
                 }
             }
             self.devicesTableView.reloadData()
+            self.devicesLoadingActvityIndicator.stopAnimating()
         }
     }
 }

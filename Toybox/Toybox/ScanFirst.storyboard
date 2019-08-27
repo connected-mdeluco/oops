@@ -21,7 +21,7 @@
                         <subviews>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="Lui-5G-f73">
                                 <rect key="frame" x="0.0" y="269" width="768" height="705"/>
-                                <color key="backgroundColor" name="underPageBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                <color key="backgroundColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="0.49715121102788945" colorSpace="custom" customColorSpace="sRGB"/>
                             </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" text="ⓣⓞⓨ ⓑⓞⓧ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="koY-Jl-f7v">
                                 <rect key="frame" x="290" y="20" width="188.5" height="36"/>
@@ -183,7 +183,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3hy-NP-jbs">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="3hy-NP-jbs">
                                 <rect key="frame" x="192.5" y="20" width="383" height="29"/>
                                 <segments>
                                     <segment title="Phones"/>
@@ -195,6 +195,10 @@
                                     <action selector="devicesSegmentedControlChangedAction:" destination="g9C-zj-b5N" eventType="valueChanged" id="yO9-Pe-LQP"/>
                                 </connections>
                             </segmentedControl>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dBn-Xd-3BT">
+                                <rect key="frame" x="0.0" y="56" width="768" height="910"/>
+                                <color key="backgroundColor" red="0.58823529411764708" green="0.58823529411764708" blue="0.58823529411764708" alpha="0.50223214285714279" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N1e-Ez-lPt">
                                 <rect key="frame" x="8" y="56" width="752" height="910"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -254,7 +258,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="dBn-Xd-3BT" firstAttribute="height" secondItem="N1e-Ez-lPt" secondAttribute="height" id="4cL-zI-q17"/>
                             <constraint firstItem="N1e-Ez-lPt" firstAttribute="top" secondItem="3hy-NP-jbs" secondAttribute="bottom" constant="8" id="D31-HV-QW8"/>
+                            <constraint firstItem="dBn-Xd-3BT" firstAttribute="top" secondItem="N1e-Ez-lPt" secondAttribute="top" id="F3v-zJ-4JD"/>
+                            <constraint firstItem="dBn-Xd-3BT" firstAttribute="centerX" secondItem="L5a-QO-GFA" secondAttribute="centerX" id="M2y-bZ-rJH"/>
+                            <constraint firstItem="dBn-Xd-3BT" firstAttribute="width" secondItem="v9C-gI-LFe" secondAttribute="width" id="MAc-KP-mQs"/>
                             <constraint firstItem="v9C-gI-LFe" firstAttribute="bottom" secondItem="N1e-Ez-lPt" secondAttribute="bottom" constant="8" id="MkG-lU-Qli"/>
                             <constraint firstItem="3hy-NP-jbs" firstAttribute="top" secondItem="v9C-gI-LFe" secondAttribute="top" id="VaN-hW-sqW"/>
                             <constraint firstItem="v9C-gI-LFe" firstAttribute="trailing" secondItem="N1e-Ez-lPt" secondAttribute="trailing" constant="8" id="t5G-hK-8Br"/>
@@ -266,6 +274,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Devices" image="iPhone" id="MF3-Rk-RN9"/>
                     <connections>
+                        <outlet property="devicesLoadingActvityIndicator" destination="dBn-Xd-3BT" id="EQl-WB-ree"/>
                         <outlet property="devicesSegmentedControl" destination="3hy-NP-jbs" id="9dl-cg-ahx"/>
                         <outlet property="devicesTableView" destination="N1e-Ez-lPt" id="BgA-5C-oRx"/>
                     </connections>
