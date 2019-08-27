@@ -19,6 +19,7 @@
 		F4AAD5EF230DD89D0018E73D /* ErrorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAD5EC230DD89D0018E73D /* ErrorManager.swift */; };
 		F4AAD5F1230DDAFC0018E73D /* CheckoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAD5F0230DDAFC0018E73D /* CheckoutType.swift */; };
 		F4AAD5F723107D000018E73D /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAD5F623107D000018E73D /* DevicesViewController.swift */; };
+		F4AAD5FB231566280018E73D /* DeviceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAD5FA231566280018E73D /* DeviceTableViewCell.swift */; };
 		F4BB49892152A84500F74744 /* SnipeAPIResponseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB49882152A84500F74744 /* SnipeAPIResponseModels.swift */; };
 		F4E7C6802301A7D700382AE2 /* ScanFirst.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4E7C67F2301A7D700382AE2 /* ScanFirst.storyboard */; };
 		F4E7C6822301ABAB00382AE2 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E7C6812301ABAB00382AE2 /* ScannerViewController.swift */; };
@@ -62,6 +63,7 @@
 		F4AAD5ED230DD89D0018E73D /* StringLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = StringLiterals.swift; path = "/Users/cl-dev/Development/toybox-ios/Toybox/Toybox/StringLiterals.swift"; sourceTree = "<absolute>"; };
 		F4AAD5F0230DDAFC0018E73D /* CheckoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutType.swift; sourceTree = "<group>"; };
 		F4AAD5F623107D000018E73D /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DevicesViewController.swift; path = "/Users/cl-dev/Development/toybox-ios/Toybox/Toybox/DevicesViewController.swift"; sourceTree = "<absolute>"; };
+		F4AAD5FA231566280018E73D /* DeviceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceTableViewCell.swift; sourceTree = "<group>"; };
 		F4BB49882152A84500F74744 /* SnipeAPIResponseModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnipeAPIResponseModels.swift; sourceTree = "<group>"; };
 		F4E7C67F2301A7D700382AE2 /* ScanFirst.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ScanFirst.storyboard; sourceTree = "<group>"; };
 		F4E7C6812301ABAB00382AE2 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				F4E7C6812301ABAB00382AE2 /* ScannerViewController.swift */,
 				F48218F22305922400C9BC14 /* ConnectorViewController.swift */,
 				F4AAD5F623107D000018E73D /* DevicesViewController.swift */,
+				F4AAD5FA231566280018E73D /* DeviceTableViewCell.swift */,
 				F4AAD5F0230DDAFC0018E73D /* CheckoutType.swift */,
 				F4E7C68723049A4E00382AE2 /* Button.swift */,
 				F4AAD5EA230B3F230018E73D /* UIStoryboardSegueWithCompletion.swift */,
@@ -360,6 +363,7 @@
 				F4AAD5F723107D000018E73D /* DevicesViewController.swift in Sources */,
 				F4AAD5EB230B3F230018E73D /* UIStoryboardSegueWithCompletion.swift in Sources */,
 				F4F09DB71DAF669400026BB2 /* AppDelegate.swift in Sources */,
+				F4AAD5FB231566280018E73D /* DeviceTableViewCell.swift in Sources */,
 				F4E7C6822301ABAB00382AE2 /* ScannerViewController.swift in Sources */,
 				F48218F32305922400C9BC14 /* ConnectorViewController.swift in Sources */,
 				F4AAD5EE230DD89D0018E73D /* StringLiterals.swift in Sources */,

@@ -12,7 +12,7 @@ class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet var devicesSegmentedControl: UISegmentedControl!
     @IBOutlet var devicesTableView: UITableView!
 
-    // Category ID: Name
+    // Category IDs mapped to Category Names
     let categories: [Int:String] = [
         17: "IoT (Android)", // "AAI"
         3: "Android", // "ADP"
@@ -28,7 +28,7 @@ class DevicesViewController: UIViewController, UITableViewDelegate, UITableViewD
         12: "Speakers" // "XSP"
     ]
 
-    // Segment: List of Category IDs
+    // Lists of Category IDs in each segment
     let segments: [Int: [Int]] = [
         0: [3, 4],
         1: [6, 7],
@@ -86,15 +86,14 @@ extension DevicesViewController {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "DeviceCell", for: indexPath)
-        cell.textLabel?.text = ""
-        cell.detailTextLabel?.text = ""
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DeviceCell", for: indexPath) as! DeviceTableViewCell
+
+        // Empty cells under section headers while loading
+        cell.clear()
 
         guard indexPath.section < devices.count else { return cell }
         let devicesForSection = devices[indexPath.section]
-        let status = devicesForSection[indexPath.row].status.statusMeta
-        cell.textLabel?.text = devicesForSection[indexPath.row].name
-        cell.detailTextLabel?.text = status != .deployable ? "Unavailable" : "Available"
+        cell.update(with: devicesForSection[indexPath.row])
 
         return cell
     }
