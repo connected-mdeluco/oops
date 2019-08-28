@@ -99,13 +99,17 @@ struct Device: Codable {
     }
 }
 
-struct Employee: Codable {
+struct Employee: Codable, Equatable {
     let name: String
     let id: Int
     
     init(name: String, id: Int) {
         self.name = name
         self.id = id
+    }
+
+    static func ==(lhs: Employee, rhs: Employee) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 

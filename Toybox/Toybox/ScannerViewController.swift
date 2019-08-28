@@ -34,6 +34,11 @@ UITableViewDelegate {
             updateButtons()
         }
     }
+    var employee: Employee? = nil {
+        didSet {
+            updateButtons()
+        }
+    }
 
     let qrScannerQueue = DispatchQueue(label: "qrScannerQueue")
     let videoCaptureSession: AVCaptureSession = AVCaptureSession()
@@ -90,13 +95,9 @@ UITableViewDelegate {
     
     @IBAction func unwindToScanner(_ unwindSegue: UIStoryboardSegue) {
         guard unwindSegue.identifier == "SelectedConnectorUnwindSegue",
-            let source = unwindSegue.source as? ConnectorViewController,
-            let employee = source.employee,
-            let segue = unwindSegue as? UIStoryboardSegueWithCompletion else { return }
-
-        segue.completion = {
-            self.checkout(as: employee, onComplete: {})
-        }
+            let source = unwindSegue.source as? ConnectorViewController else { return }
+        employee = source.employee
+        deviceTableView.reloadData()
     }
     
     // MARK: - AV
@@ -135,17 +136,35 @@ UITableViewDelegate {
     }
 
     @IBAction func continueAction(_ sender: Any) {
+        if employee != nil {
+            checkout()
+            return
+        }
+
+        let alertController = UIAlertController(title: "Transfer or Return?", message: "If you would like to transfer these devices, click transfer and choose the employee receiving the devices...", preferredStyle: .actionSheet)
+        let transferAction = UIAlertAction(title: "Transfer", style: .default, handler: { (alert: UIAlertAction!) -> Void in
+            self.performSegue(withIdentifier: "SelectConnectorSegue", sender: self)
+        })
+        let returnAction = UIAlertAction(title: "Return", style: .destructive, handler: { (alert: UIAlertAction!) -> Void in
+            self.checkout()
+        })
+        alertController.addAction(transferAction)
+        alertController.addAction(returnAction)
+        alertController.popoverPresentationController?.permittedArrowDirections = [.down]
+        alertController.popoverPresentationController?.sourceView = confirmButton
+        alertController.popoverPresentationController?.sourceRect = CGRect(x: confirmButton.bounds.midX, y: 0, width: 0, height: 0)
+
         if devicesByCheckout(.checkout).count > 0 {
             self.performSegue(withIdentifier: "SelectConnectorSegue", sender: self)
         } else if devicesByCheckout(.checkin).count > 0 {
-            self.checkout()
+            self.present(alertController, animated: false, completion: nil)
         }
     }
 
     // MARK: - Utility functions
 
     func devicesByCheckout(_ type: CheckoutType) -> [Device] {
-        return devices.filter { checkoutType(for: $0) == type }
+        return devices.filter { checkoutType(for: $0, and: employee) == type }
     }
 
     func updateButtons() {
@@ -157,26 +176,30 @@ UITableViewDelegate {
         confirmButton.alpha = alpha
         cancelButton.alpha = alpha
 
-        if devicesByCheckout(.checkin).count > 0
-            && devicesByCheckout(.checkout).count == 0 {
+        if devices.count > 0 && devicesByCheckout(.checkin).count == devices.count {
             continueButton.setTitle("Return", for: .normal)
-        } else {
+        } else if employee == nil {
             continueButton.setTitle("Continue", for: .normal)
+        } else {
+            continueButton.setTitle("Check Out", for: .normal)
         }
 
     }
 
     func reset() {
+        employee = nil
         devices.removeAll()
     }
 
-    func checkoutType(for device: Device) -> CheckoutType {
+    func checkoutType(for device: Device, and employee: Employee? = nil) -> CheckoutType {
         let status = device.status.statusMeta
         switch status {
         case .deployable:
             return .checkout
         case .deployed:
-            return .checkin
+            guard let employee = employee,
+                let assignee = device.assignee else { return .checkin }
+            return employee != assignee ? .transfer : .checkin
         default:
             break
         }
@@ -189,13 +212,13 @@ UITableViewDelegate {
 extension ScannerViewController {
     func sections() -> Set<CheckoutType> {
         return devices.reduce(into: Set<CheckoutType>()) { statusSet, device in
-            statusSet.insert(checkoutType(for: device))
+            statusSet.insert(checkoutType(for: device, and: employee))
         }
     }
 
     func devicesInSection(section: Int) -> [Device] {
         let sortedSections = Array(sections()).sorted()
-        return devices.filter{ checkoutType(for: $0) == sortedSections[section] }
+        return devices.filter{ checkoutType(for: $0, and: employee) == sortedSections[section] }
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -216,6 +239,11 @@ extension ScannerViewController {
 
         let devicesSubset = devicesInSection(section: indexPath.section)
         cell.textLabel?.text = devicesSubset[indexPath.row].name
+
+        if let employee = employee,
+            (indexPath.section, indexPath.row) == (0, 0) {
+            cell.textLabel?.text?.append(contentsOf: " (as \(employee.name))")
+        }
 
         return cell
     }
@@ -270,11 +298,12 @@ extension ScannerViewController {
             }.done { device in
                 self.devices.append(device)
             }.catch { error in
+                // TODO: This will cause barcodes to be scanned continuously
                 self.scannedCodes.removeAll(where: { $0 == id })
             }
     }
 
-    func checkout(as employee: Employee? = nil, onComplete: (() -> ())? = nil) {
+    func checkout(onComplete: (() -> ())? = nil) {
         view.bringSubviewToFront(checkoutActivityIndicator)
         checkoutActivityIndicator.isHidden = false
         checkoutActivityIndicator.startAnimating()
