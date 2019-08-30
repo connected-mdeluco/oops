@@ -197,9 +197,11 @@ UITableViewDelegate {
         case .deployable:
             return .checkout
         case .deployed:
-            guard let employee = employee,
-                let assignee = device.assignee else { return .checkin }
-            return employee != assignee ? .transfer : .checkin
+            if let employee = employee,
+                let assignee = device.assignee {
+                return employee != assignee ? .transfer : .checkin
+            }
+            return .checkin
         default:
             break
         }
@@ -312,6 +314,11 @@ extension ScannerViewController {
         if let employee = employee {
             allPromises.append(contentsOf: devices.filter { checkoutType(for: $0) == .checkout }.map {
                 SnipeManager.borrowDevice(withId: "\($0.identifier)", toEmployee: "\(employee.id)")
+            })
+            allPromises.append(contentsOf: devices.filter { checkoutType(for: $0, and: employee) == .transfer }.map { device in
+                SnipeManager.returnDevice(device: device).then({ _ in
+                    SnipeManager.borrowDevice(withId: "\(self.devices[0].identifier)", toEmployee: "\(employee.id)")
+                })
             })
         }
         allPromises.append(contentsOf: devices.filter { checkoutType(for: $0) == .checkin }.map {
